@@ -38,6 +38,7 @@ class ReportsServiceProvider extends PackageServiceProvider
                     ->askToRunMigrations()
                     ->askToStarRepoOnGitHub('eightynine/filament-reports');
             });
+            $package->hasRoute("/web");
 
         $configFileName = $package->shortName();
 
@@ -60,6 +61,7 @@ class ReportsServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
+        $this->app->bind(ReportsManager::class, fn () => ReportsManager::getInstance());
     }
 
     public function packageBooted(): void

@@ -1,0 +1,50 @@
+<?php
+
+namespace EightyNine\Reports;
+
+use EightyNine\Reports\Concerns\HasPageSettings;
+use Filament\Facades\Filament;
+use Filament\Pages\Page;
+use Filament\Panel;
+use Illuminate\Support\Facades\Route;
+
+class Report extends Page
+{
+    public ?string $heading = "A list of repayments";
+
+    public ?string $subHeading = "A list of repayments";
+
+    public ?string $icon = "heroicon-o-document-text";
+
+    public static string $view = 'filament-reports::pages.report';
+
+    public ?string $group = null;
+
+    public ?string $logo = "/img/logo.png";
+
+    public function getHeading() : string {
+        return $this->heading;
+    }
+
+    public function getSubHeading() : string {
+        return $this->subHeading;
+    }
+
+    public function getIcon() : string {
+        return $this->icon;
+    }
+
+    public function getGroup() : ?string {
+        return $this->group;
+    }
+
+
+    public static function getRouteName(?string $panel = null): string
+    {
+        $panel ??= Filament::getCurrentPanel()->getId();
+
+        return (string) str(static::getSlug())
+            ->replace('/', '.')
+            ->prepend("filament.{$panel}.reports.");
+    }
+}
