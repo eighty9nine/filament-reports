@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace EightyNine\Reports\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class ReportsCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-reports';
 
     public $description = 'My command';
 
