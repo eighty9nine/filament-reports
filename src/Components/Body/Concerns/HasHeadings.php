@@ -21,6 +21,13 @@ trait HasHeadings
         return $this;
     }
 
+    public function useFirstRowAsHeadings(): static
+    {
+        $this->headings = $this->data->shift();
+        $this->hasHeadings = true;
+        return $this;
+    }
+
     public function useFirstColumnAsHeadings()
     {
         $this->firstColumnAsHeadings = true;
