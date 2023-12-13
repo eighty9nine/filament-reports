@@ -26,6 +26,7 @@ class Component extends ViewComponent
             'record' => [$this->getRecord()],
             'set' => [$this->getSetCallback()],
             'state' => [$this->getState()],
+            'filters' => [$this->getFilters()],
             default => parent::resolveDefaultClosureDependencyForEvaluationByName($parameterName),
         };
     }

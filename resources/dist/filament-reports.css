@@ -2402,6 +2402,10 @@ html {
   margin-top: auto;
 }
 
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .block {
   display: block;
 }
@@ -2594,6 +2598,10 @@ html {
   width: 2.25rem;
 }
 
+.w-96 {
+  width: 24rem;
+}
+
 .w-\[--sidebar-width\] {
   width: var(--sidebar-width);
 }
@@ -2621,6 +2629,14 @@ html {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-80 {
+  width: 20rem;
+}
+
+.w-24 {
+  width: 6rem;
 }
 
 .min-w-0 {
@@ -3012,6 +3028,10 @@ html {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.gap-20 {
+  gap: 5rem;
 }
 
 .gap-x-1 {
@@ -3462,6 +3482,11 @@ html {
 
 .bg-white\/5 {
   background-color: rgb(255 255 255 / 0.05);
+}
+
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
 .bg-cover {

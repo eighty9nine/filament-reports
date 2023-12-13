@@ -2,7 +2,9 @@
 
 namespace EightyNine\Reports\Components\Body;
 
+use Closure;
 use EightyNine\Reports\Components\Component;
+use EightyNine\Reports\ReportsManager;
 use Illuminate\Support\Collection;
 
 class Table extends Component
@@ -16,14 +18,13 @@ class Table extends Component
 
     protected Collection $data;
 
-
     public function __construct()
     {
     }
 
-    public function data(Collection $data): static
+    public function data(Closure $dataClosure): static
     {
-        $this->data = $data;
+        $this->data = $this->evaluate($dataClosure);
 
         return $this;
     }
@@ -38,6 +39,11 @@ class Table extends Component
         $static = app(static::class);
 
         return $static;
+    }
+
+    public function getFilters()
+    {
+        return ReportsManager::getInstance()->getFilterState();
     }
 }
 

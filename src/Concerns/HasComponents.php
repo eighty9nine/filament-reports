@@ -77,6 +77,7 @@ trait HasComponents
      */
     public function getComponents(bool $withHidden = false): array
     {
+
         $components = array_map(function (Component $component): Component {
             $component->container($this);
 

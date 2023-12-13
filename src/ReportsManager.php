@@ -2,16 +2,19 @@
 
 namespace EightyNine\Reports;
 
+use EightyNine\Reports\Concerns\HasFilterState;
 use EightyNine\Reports\Concerns\HasPageSettings;
 use Filament\Panel;
 use Filament\Panel\Concerns\HasComponents;
 use Filament\Support\Enums\MaxWidth;
 use Illuminate\Contracts\View\View;
+use Livewire\Livewire;
 
 class ReportsManager
 {
     use HasComponents;
     use HasPageSettings;
+    use HasFilterState;
 
     protected array $reports = [];
 
@@ -34,5 +37,15 @@ class ReportsManager
             directory: $in,
             namespace: $for,
         );
+
+        collect($this->reports)->each(function ($report) {
+            $this->queueLivewireComponentForRegistration($report);
+        });
+
+        foreach ($this->livewireComponents as $componentName => $componentClass) {
+            Livewire::component($componentName, $componentClass);
+        }
+
+        $this->livewireComponents = [];
     }
 }

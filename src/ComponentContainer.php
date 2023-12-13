@@ -44,6 +44,7 @@ class ComponentContainer extends ViewComponent
             'livewire' => [$this->getLivewire()],
             'model' => [$this->getModel()],
             'record' => [$this->getRecord()],
+            'filters' => [$this->getFilters()],
             default => parent::resolveDefaultClosureDependencyForEvaluationByName($parameterName),
         };
     }

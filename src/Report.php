@@ -2,28 +2,36 @@
 
 namespace EightyNine\Reports;
 
+use EightyNine\Reports\Components\ActionsPanel;
 use EightyNine\Reports\Components\Body;
 use EightyNine\Reports\Components\Footer;
 use EightyNine\Reports\Components\Header;
+use EightyNine\Reports\Concerns\HasFilterForm;
 use EightyNine\Reports\Concerns\HasPageSettings;
+use EightyNine\Reports\Concerns\InteractsWithActionsPanel;
 use EightyNine\Reports\Concerns\ResolvesDynamicLivewireProperties;
+use EightyNine\Reports\Contracts\HasActionsPanel;
 use EightyNine\Reports\Contracts\HasBody;
 use EightyNine\Reports\Contracts\HasFooter;
 use EightyNine\Reports\Contracts\HasHeader;
 use Filament\Facades\Filament;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
 use Filament\Pages\Page;
 use Filament\Panel;
 use Illuminate\Support\Facades\Route;
 
-class Report extends Page implements HasBody, HasHeader, HasFooter
+class Report extends Page implements HasBody, HasHeader, HasFooter, HasActionsPanel, HasForms
 {
     use ResolvesDynamicLivewireProperties;
+    use InteractsWithActionsPanel;
+    use HasFilterForm;
 
-    public ?string $heading = "A list of repayments";
+    public ?string $heading = "";
 
     public ?array $sections= ['pad', 'header', 'body', 'footer', 'pad'];
 
-    public ?string $subHeading = "A list of repayments";
+    public ?string $subHeading = "";
 
     public ?string $icon = "heroicon-o-document-text";
 
@@ -65,7 +73,7 @@ class Report extends Page implements HasBody, HasHeader, HasFooter
 
     public function getTableBody(): Body
     {
-        return $this->body(Body::make($this));
+        return $this->body(Body::make($this, $this->getFilterData()));
     }
 
     public function getTableFooter(): Footer
@@ -87,4 +95,5 @@ class Report extends Page implements HasBody, HasHeader, HasFooter
     {
         return $footer;
     }
+
 }
