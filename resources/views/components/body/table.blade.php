@@ -4,14 +4,15 @@
     $headings = $getHeadings();
     $isFirstColumnUsedAsHeadings = $isFirstColumnUsedAsHeadings();
 @endphp
-<table style="width: 100%; border-top: 3px solid black;
+<x-filament-reports::table.index
+    style="width: 100%; border-top: 3px solid black;
 border-bottom: 1px solid rgb(210, 210, 210);">
 
-    <thead>
+    <x-filament-reports::table.head>
         @if ($hasHeadings)
-            <tr>
+            <x-filament-reports::table.row>
                 @foreach ($headings as $heading)
-                    <th
+                    <x-filament-reports::table.head-cell
                         style="
                             padding-left: 8px;
                             padding-right: 8px;
@@ -22,17 +23,17 @@ border-bottom: 1px solid rgb(210, 210, 210);">
                             text-align: left;
                             font-weight: bold;
                         ">
-                        {{ $heading }}</th>
+                        {{ $heading }}</x-filament-reports::table.head-cell>
                 @endforeach
-            </tr>
+            </x-filament-reports::table.row>
         @endif
-    </thead>
-    <tbody>
+    </x-filament-reports::table.head>
+    <x-filament-reports::table.body>
         @foreach ($data as $row)
-            <tr>
+            <x-filament-reports::table.row>
                 @foreach ($row as $cell)
                     @if ($loop->first && $isFirstColumnUsedAsHeadings)
-                        <th
+                        <x-filament-reports::table.head-cell
                             style="
                             padding-left: 8px;
                             padding-right: 8px;
@@ -42,36 +43,27 @@ border-bottom: 1px solid rgb(210, 210, 210);">
                             border-top: 1px solid #aaa;
                             text-align: left;
                             font-weight: bold;
-                            @if ($loop->parent->last)
-                                border-bottom: 1px solid #aaa;
-                            @else
-                                border-bottom: 1px solid #eee;
-                            @endif
+                            {{ $loop->parent->last ? 'border-bottom: 1px solid #aaa;' : 'border-bottom: 1px solid #eee;' }}
                         ">
-                            {{ $cell }}</th>
+                            {{ $cell }}</x-filament-reports::table.head-cell>
                     @else
-                    <td
-                        style="
+                        <x-filament-reports::table.cell
+                            style="
                             padding-left: 8px;
                             padding-right: 8px;
                             padding-top: 4px;
                             padding-bottom: 4px;
-                            @if ($loop->parent->last)
-                                border-bottom: 1px solid #aaa;
-                            @else
-                                border-bottom: 1px solid #eee;
-                            @endif
+                            {{ $loop->parent->last ? 'border-bottom: 1px solid #aaa;' : 'border-bottom: 1px solid #eee;' }}
                         ">
-                        <span
-                            style="
+                            <span style="
                             font-size: 12px;
                         ">
-                            {{ $cell }}
-                        </span>
-                    </td>
+                                {{ $cell }}
+                            </span>
+                        </x-filament-reports::table.cell>
                     @endif
                 @endforeach
-            </tr>
+            </x-filament-reports::table.row>
         @endforeach
-    </tbody>
-</table>
+    </x-filament-reports::table.body>
+</x-filament-reports::table.index>

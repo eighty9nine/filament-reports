@@ -6,4 +6,6 @@
 <span style="
         {{ $fontSize->value }}
         {{ $fontWeight->value }}
-    ">{{ $text }}</span>
+    ">
+    {{ $text }}
+</span>

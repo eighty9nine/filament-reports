@@ -14,15 +14,16 @@
         HorizontalAlignment::Center => 'text-align:center;',
     };
 @endphp
-<table style="width:100%">
-    <tr>
+<x-filament-reports::table.index style="width:100%">
+    <x-filament-reports::table.row>
         @foreach ($getChildComponents() as $reportComponent)
-            <td style="
-            {{ $horizontalAlignment }}}
-            {{ $verticalAlignment }}}
+            <x-filament-reports::table.cell
+                style="
+            {{ $horizontalAlignment }}
+            {{ $verticalAlignment }}
             ">
                 {{ $reportComponent }}
-            </td>
+            </x-filament-reports::table.cell>
         @endforeach
-    </tr>
-</table>
+    </x-filament-reports::table.row>
+</x-filament-reports::table.index>
