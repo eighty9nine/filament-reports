@@ -12,19 +12,19 @@
             <td style="padding-top:48px;">
             </td>
         <tr>
-            <td style="padding-left:48px; padding-right:48px; vertical-align: top;">
+            <td style="padding-left:48px; padding-right:48px;  padding-top: 20px; vertical-align: top;">
                 {{-- heading section --}}
                 {{ $this->header }}
             </td>
         </tr>
         <tr>
-            <td style="padding-left:48px; padding-right:48px;vertical-align: top;">
+            <td style="padding-left:48px; padding-right:48px;  padding-top: 20px; vertical-align: top;">
                 {{-- body section --}}
                 {{ $this->body }}
             </td>
         </tr>
         <tr>
-            <td style="padding-left:48px; padding-right:48px;vertical-align: top;">
+            <td style="padding-left:48px; padding-right:48px;  padding-top: 20px; vertical-align: top;">
                 {{-- footer section --}}
                 {{ $this->footer }}
             </td>

@@ -5,7 +5,7 @@
     $isFirstColumnUsedAsHeadings = $isFirstColumnUsedAsHeadings();
 @endphp
 <table style="width: 100%; border-top: 3px solid black;
-border-bottom: 1px solid rgb(210, 210, 210); margin-top: 20px;">
+border-bottom: 1px solid rgb(210, 210, 210);">
 
     <thead>
         @if ($hasHeadings)
