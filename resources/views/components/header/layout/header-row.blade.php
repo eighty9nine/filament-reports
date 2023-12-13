@@ -1,7 +1,7 @@
 <table style="width:100%">
     <tr>
         @foreach ($getChildComponents() as $reportComponent)
-            <td>
+            <td style="vertical-align: top;">
                 {{ $reportComponent }}
             </td>
         @endforeach
