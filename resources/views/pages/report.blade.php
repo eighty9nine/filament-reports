@@ -1,5 +1,5 @@
 @php
-    $cellStyle = 'padding-left:48px; padding-right:48px;  padding-top: 20px; vertical-align: top;';
+    $sections = $this->sections;
 @endphp
 <x-filament-panels::page>
     <x-filament-reports::table.index
@@ -10,31 +10,17 @@
         border-radius: 10px;
         border: 1px solid whitesmoke;
         ">
-        <x-filament-reports::table.row>
-            <x-filament-reports::table.cell style="padding-top:48px;">
-            </x-filament-reports::table.cell>
-        </x-filament-reports::table.row>
-        <x-filament-reports::table.row>
-            <x-filament-reports::table.cell style="{{ $cellStyle }}">
-                {{-- heading section --}}
-                {{ $this->header }}
-            </x-filament-reports::table.cell>
-        </x-filament-reports::table.row>
-        <x-filament-reports::table.row>
-            <x-filament-reports::table.cell style="{{ $cellStyle }}">
-                {{-- body section --}}
-                {{ $this->body }}
-            </x-filament-reports::table.cell>
-        </x-filament-reports::table.row>
-        <x-filament-reports::table.row>
-            <x-filament-reports::table.cell style="{{ $cellStyle }}">
-                {{-- footer section --}}
-                {{ $this->footer }}
-            </x-filament-reports::table.cell>
-        </x-filament-reports::table.row>
-        <x-filament-reports::table.row>
-            <x-filament-reports::table.cell style="padding-top:48px;">
-            </x-filament-reports::table.cell>
-        </x-filament-reports::table.row>
+        @foreach ($sections as $section)
+            <x-filament-reports::table.row>
+                <x-filament-reports::table.cell
+                    style="{{ $section == 'pad'
+                        ? 'padding-top:48px;'
+                        : 'padding-left:48px; padding-right:48px;  padding-top: 20px; vertical-align: top;' }}">
+                    @if ($section != 'pad')
+                        {{ $this->$section }}
+                    @endif
+                </x-filament-reports::table.cell>
+            </x-filament-reports::table.row>
+        @endforeach
     </x-filament-reports::table.index>
 </x-filament-panels::page>

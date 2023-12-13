@@ -21,6 +21,8 @@ class Report extends Page implements HasBody, HasHeader, HasFooter
 
     public ?string $heading = "A list of repayments";
 
+    public ?array $sections= ['pad', 'header', 'body', 'footer', 'pad'];
+
     public ?string $subHeading = "A list of repayments";
 
     public ?string $icon = "heroicon-o-document-text";
