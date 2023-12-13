@@ -2,8 +2,13 @@
 
 namespace EightyNine\Reports\Components;
 
+use EightyNine\Reports\Components\Concerns\CanModifyImageWidth;
+
 class Image extends Component
 {
+
+    use CanModifyImageWidth;
+
     /**
      * @var view-string
      */

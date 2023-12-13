@@ -1,4 +1,9 @@
 @php
     $text = $getText();
+    $fontSize = $getFontSize();
+    $fontWeight = $getFontWeight();
 @endphp
-<p>{{$text}}</p>
+<span style="
+        {{ $fontSize->value }}
+        {{ $fontWeight->value }}
+    ">{{ $text }}</span>

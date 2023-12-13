@@ -1,4 +1,5 @@
 @php
     $path = $getPath();
+    $width = $getWidth();
 @endphp
-<img src="{{$path}}" alt="" style="max-height: 120px">
+<img src="{{ $path }}" alt="" style="{{ $width->value }}">
