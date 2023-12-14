@@ -5,7 +5,8 @@
     $isFirstColumnUsedAsHeadings = $isFirstColumnUsedAsHeadings();
 @endphp
 <x-filament-reports::table.index
-    style="width: 100%; border-top: 3px solid black;
+    class="border-t-4 border-primary-500"
+    style="width: 100%;
 border-bottom: 1px solid rgb(210, 210, 210);">
 
     <x-filament-reports::table.head>

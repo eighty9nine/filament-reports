@@ -1,4 +1,4 @@
-<div class="w-96">
+<div class="w-96 fi-reports-action-panel">
 
     <div class="flex w-full">
         <div class="flex-grow">
@@ -12,15 +12,15 @@
             </x-slot>
 
             <x-filament::dropdown.list>
-                <x-filament::dropdown.list.item wire:click="openViewModal">
+                <x-filament::dropdown.list.item wire:click="exportToPdf">
                     To PDF
                 </x-filament::dropdown.list.item>
 
-                <x-filament::dropdown.list.item wire:click="openEditModal">
+                <x-filament::dropdown.list.item @click="$exportToExcel()">
                     To Excel
                 </x-filament::dropdown.list.item>
 
-                <x-filament::dropdown.list.item wire:click="openDeleteModal">
+                <x-filament::dropdown.list.item @click="$printReport()">
                     Print
                 </x-filament::dropdown.list.item>
             </x-filament::dropdown.list>

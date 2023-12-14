@@ -43,7 +43,7 @@ class Table extends Component
 
     public function getFilters()
     {
-        return ReportsManager::getInstance()->getFilterState();
+        return reports()->getFilterState();
     }
 }
 

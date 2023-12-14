@@ -2,13 +2,16 @@
 
 namespace EightyNine\Reports\Components;
 
+use EightyNine\Reports\Components\Concerns\CanModifyColor;
 use EightyNine\Reports\Components\Concerns\CanModifyFontSize;
 use EightyNine\Reports\Components\Concerns\CanModifyFontWeight;
+use Filament\Support\Concerns\HasColor;
 
 class Text extends Component
 {
     use CanModifyFontSize;
     use CanModifyFontWeight;
+    use CanModifyColor;
 
     /**
      * @var view-string

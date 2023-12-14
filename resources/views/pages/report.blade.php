@@ -1,10 +1,8 @@
-@php
-    $sections = $this->sections;
-@endphp
 <x-filament-panels::page>
     <div class="flex flex-row-reverse gap-8">
         {{ $this->actionsPanel}}
         <x-filament-reports::table.index
+            id="fi-report"
             style="
             max-width:100%;
             min-width:75%;
@@ -13,9 +11,10 @@
             border-radius: 10px;
             border: 1px solid whitesmoke;
             ">
-            @foreach ($sections as $section)
+            @foreach ($this->sections as $section)
                 <x-filament-reports::table.row>
                     <x-filament-reports::table.cell
+                        class="pad"
                         style="{{ $section == 'pad'
                             ? 'padding-top:48px;'
                             : 'padding-left:48px; padding-right:48px;  padding-top: 20px; vertical-align: top;' }}">

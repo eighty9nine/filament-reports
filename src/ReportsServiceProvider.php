@@ -61,7 +61,7 @@ class ReportsServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        $this->app->bind(ReportsManager::class, fn () => ReportsManager::getInstance());
+        $this->app->bind(ReportsManager::class, fn () => reports());
     }
 
     public function packageBooted(): void

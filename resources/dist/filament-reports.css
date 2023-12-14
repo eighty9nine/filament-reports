@@ -2402,10 +2402,6 @@ html {
   margin-top: auto;
 }
 
-.mt-4 {
-  margin-top: 1rem;
-}
-
 .block {
   display: block;
 }
@@ -2629,14 +2625,6 @@ html {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-80 {
-  width: 20rem;
-}
-
-.w-24 {
-  width: 6rem;
 }
 
 .min-w-0 {
@@ -3030,10 +3018,6 @@ html {
   gap: 2rem;
 }
 
-.gap-20 {
-  gap: 5rem;
-}
-
 .gap-x-1 {
   -moz-column-gap: 0.25rem;
        column-gap: 0.25rem;
@@ -3352,6 +3336,14 @@ html {
   border-top-width: 1px;
 }
 
+.border-t-2 {
+  border-top-width: 2px;
+}
+
+.border-t-4 {
+  border-top-width: 4px;
+}
+
 .\!border-none {
   border-style: none !important;
 }
@@ -3482,11 +3474,6 @@ html {
 
 .bg-white\/5 {
   background-color: rgb(255 255 255 / 0.05);
-}
-
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
 .bg-cover {
@@ -4158,6 +4145,40 @@ html {
 
 .\[transform\:translateZ\(0\)\] {
   transform: translateZ(0);
+}
+
+@media print {
+  .fi-topbar{
+    display: none;
+  }
+
+  .fi-sidebar{
+    display: none;
+  }
+
+  .fi-reports-action-panel{
+    display: none;
+  }
+
+  .fi-header-heading {
+    display: none;
+  }
+
+  .fi-header-subheading {
+    display: none;
+  }
+
+  #fi-report{
+    width: 100%;
+    box-shadow: none !important;
+    border: none !important;
+    /* Add this line to remove the border */
+    border-radius: none !important;
+  }
+
+  .pad{
+    padding: 0px !important;
+  }
 }
 
 :is(.dark .dark\:prose-invert) {

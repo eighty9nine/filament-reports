@@ -34,7 +34,7 @@ trait HasFilterForm
 
     public function filter(): void
     {
-        ReportsManager::getInstance()->setFilterState($this->filterForm->getState());
+        reports()->setFilterState($this->filterForm->getState());
     }
 
     protected function getFilterData(): array

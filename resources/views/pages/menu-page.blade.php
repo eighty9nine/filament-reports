@@ -1,7 +1,7 @@
 @php
     use EightyNine\Reports\ReportsManager;
 
-    $reportGroups = collect(ReportsManager::getInstance()->getReports())
+    $reportGroups = collect(reports()->getReports())
         ->map(
             fn($report) => [
                 'report' => app($report),
@@ -10,6 +10,7 @@
                 'subHeading' => app($report)->getSubheading(),
                 'icon' => app($report)->getIcon(),
                 'url' => app($report)->getUrl(),
+                'shouldOpenInNewTab' => app($report)->getShouldOpenInNewTab(), // Add this line
             ],
         )
         ->sortBy('group')
@@ -21,7 +22,8 @@
             <x-filament::grid default="3" class="gap-4">
                 @foreach ($reportGroup as $report)
                     <x-filament::grid.column>
-                        <a href="{{ $report['url'] }}">
+                        <a
+                            {{ \Filament\Support\generate_href_html($report['url'], $report['shouldOpenInNewTab']) }}>
                             <div class="hover:cursor-pointer hover:shadow-lg">
 
                                 <x-filament::card>

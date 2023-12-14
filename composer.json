@@ -36,7 +36,10 @@
         "psr-4": {
             "EightyNine\\Reports\\": "src/",
             "EightyNine\\Reports\\Database\\Factories\\": "database/factories/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

@@ -1,1 +1,28 @@
 @import '../../vendor/filament/filament/resources/css/theme.css';
+
+@media print {
+    .fi-topbar{
+        display: none;
+    }
+    .fi-sidebar{
+        display: none;
+    }
+    .fi-reports-action-panel{
+        display: none;
+    }
+    .fi-header-heading {
+        display: none;
+    }
+    .fi-header-subheading {
+        display: none;
+    }
+    #fi-report{
+        width: 100%;
+        box-shadow: none !important;
+        border: none !important; /* Add this line to remove the border */
+        border-radius: none !important;
+    }
+    .pad{
+        padding: 0px !important;
+    }
+}

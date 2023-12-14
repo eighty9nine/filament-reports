@@ -3,6 +3,7 @@
 namespace EightyNine\Reports;
 
 use Filament\Contracts\Plugin;
+use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\Support\Enums\MaxWidth;
 
@@ -15,22 +16,31 @@ class ReportsPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
+
+        // register reports
+        reports()->discoverReports(
+            in: app_path('Filament/Reports'),
+            for: 'App\\Filament\\Reports'
+        );
+
         $panel->discoverPages(
             in: __DIR__ . "/Pages",
             for: "EightyNine\\Reports\\Pages"
-        );
-
-        // register reports
-        ReportsManager::getInstance()->discoverReports(
-            in: app_path('Filament/Reports'),
-            for: 'App\\Filament\\Reports'
         );
     }
 
 
     public function boot(Panel $panel): void
     {
-        //
+
+        if (!reports()->getUseReportListPage()) {
+            $panel->navigationItems(collect(reports()->getReports())->map(function ($report) {
+                $report = app($report);
+                return NavigationItem::make($report->getTitle())
+                    ->url($report->getUrl())
+                    ->group(reports()->getNavigationGroup());
+            })->toArray());
+        }
     }
 
     public static function make(): static
@@ -48,109 +58,115 @@ class ReportsPlugin implements Plugin
 
     public function navigationLabel(string $label)
     {
-        ReportsManager::getInstance()->navigationLabel($label);
+        reports()->navigationLabel($label);
         return $this;
     }
 
     public function title(string $title)
     {
-        ReportsManager::getInstance()->title($title);
+        reports()->title($title);
         return $this;
     }
 
     public function heading(string $heading)
     {
-        ReportsManager::getInstance()->heading($heading);
+        reports()->heading($heading);
         return $this;
     }
 
     public function slug(string $slug)
     {
-        ReportsManager::getInstance()->slug($slug);
+        reports()->slug($slug);
         return $this;
     }
 
     public function subHeading(string $subHeading)
     {
-        ReportsManager::getInstance()->subHeading($subHeading);
+        reports()->subHeading($subHeading);
         return $this;
     }
 
     public function header(string $header)
     {
-        ReportsManager::getInstance()->header($header);
+        reports()->header($header);
         return $this;
     }
 
     public function footer(string $footer)
     {
-        ReportsManager::getInstance()->footer($footer);
+        reports()->footer($footer);
         return $this;
     }
 
     public function maxContentWidth(MaxWidth $maxContentWidth)
     {
-        ReportsManager::getInstance()->maxContentWidth($maxContentWidth);
+        reports()->maxContentWidth($maxContentWidth);
         return $this;
     }
 
     public function headerActtions(array $headerActions)
     {
-        ReportsManager::getInstance()->headerActtions($headerActions);
+        reports()->headerActtions($headerActions);
         return $this;
     }
 
     public function headerWidgets(array $headerWidgets)
     {
-        ReportsManager::getInstance()->headerWidgets($headerWidgets);
+        reports()->headerWidgets($headerWidgets);
         return $this;
     }
 
     public function headerWidgetsColumns(int|array $headerWidgetsColumns)
     {
-        ReportsManager::getInstance()->headerWidgetsColumns($headerWidgetsColumns);
+        reports()->headerWidgetsColumns($headerWidgetsColumns);
         return $this;
     }
 
     public function navigationIcon(string $navigationIcon)
     {
-        ReportsManager::getInstance()->navigationIcon($navigationIcon);
+        reports()->navigationIcon($navigationIcon);
         return $this;
     }
 
     public function activeNavigationIcon(string $activeNavigationIcon)
     {
-        ReportsManager::getInstance()->activeNavigationIcon($activeNavigationIcon);
+        reports()->activeNavigationIcon($activeNavigationIcon);
         return $this;
     }
 
     public function navigationSort(int $navigationSort)
     {
-        ReportsManager::getInstance()->navigationSort($navigationSort);
+        reports()->navigationSort($navigationSort);
         return $this;
     }
 
     public function navigationGroup(string $navigationGroup)
     {
-        ReportsManager::getInstance()->navigationGroup($navigationGroup);
+        reports()->navigationGroup($navigationGroup);
         return $this;
     }
 
     public function navigationParentItem(string $navigationParentItem)
     {
-        ReportsManager::getInstance()->navigationParentItem($navigationParentItem);
+        reports()->navigationParentItem($navigationParentItem);
         return $this;
     }
 
     public function navigationBadge(string $navigationBadge)
     {
-        ReportsManager::getInstance()->navigationBadge($navigationBadge);
+        reports()->navigationBadge($navigationBadge);
         return $this;
     }
 
     public function navigationBadgeColor(string|array|null $navigationBadgeColor)
     {
-        ReportsManager::getInstance()->navigationBadgeColor($navigationBadgeColor);
+        reports()->navigationBadgeColor($navigationBadgeColor);
+        return $this;
+    }
+
+    public function useReportListPage(bool $useReportListPage = true)
+    {
+        reports()->useReportListPage($useReportListPage);
         return $this;
     }
 }

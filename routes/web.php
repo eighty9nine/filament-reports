@@ -31,7 +31,7 @@ Route::name('filament.')
                                     ->prefix($hasTenancy ? (($tenantRoutePrefix) ? "{$tenantRoutePrefix}/" : '') . ('{tenant' . (($tenantSlugAttribute) ? ":{$tenantSlugAttribute}" : '') . '}') : '')
                                     ->group(function () use ($panel): void {
                                         Route::name('reports.')->group(function () use ($panel): void {
-                                            foreach (ReportsManager::getInstance()->getReports() as $report) {
+                                            foreach (reports()->getReports() as $report) {
                                                 $report::routes($panel);
                                             }
                                         });

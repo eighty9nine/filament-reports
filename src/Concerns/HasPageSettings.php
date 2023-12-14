@@ -36,13 +36,20 @@ trait HasPageSettings
 
     protected ?int $navigationSort = null;
 
-    protected ?string $navigationGroup = null;
+    protected ?string $navigationGroup = "";
 
     protected ?string $navigationParentItem = null;
 
     protected string | array | null $navigationBadgeColor = null;
 
     protected ?string $navigationBadge = null;
+
+    protected bool $useReportListPage = false;
+
+    public function useReportListPage(bool $useReportListPage = true){
+        $this->useReportListPage = $useReportListPage;
+        return $this;
+    }
 
     public function navigationLabel(string $label)
     {
@@ -247,4 +254,8 @@ trait HasPageSettings
         return $this->reports;
     }
 
+    public function getUseReportListPage()
+    {
+        return $this->useReportListPage;
+    }
 }

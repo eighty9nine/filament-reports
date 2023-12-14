@@ -8,6 +8,7 @@ use EightyNine\Reports\Components\Footer;
 use EightyNine\Reports\Components\Header;
 use EightyNine\Reports\Concerns\HasFilterForm;
 use EightyNine\Reports\Concerns\HasPageSettings;
+use EightyNine\Reports\Concerns\HasReportActions;
 use EightyNine\Reports\Concerns\InteractsWithActionsPanel;
 use EightyNine\Reports\Concerns\ResolvesDynamicLivewireProperties;
 use EightyNine\Reports\Contracts\HasActionsPanel;
@@ -26,6 +27,7 @@ class Report extends Page implements HasBody, HasHeader, HasFooter, HasActionsPa
     use ResolvesDynamicLivewireProperties;
     use InteractsWithActionsPanel;
     use HasFilterForm;
+    use HasReportActions;
 
     public ?string $heading = "";
 
@@ -40,6 +42,13 @@ class Report extends Page implements HasBody, HasHeader, HasFooter, HasActionsPa
     public ?string $group = null;
 
     public ?string $logo = "/img/logo.png";
+
+    public bool $shouldOpenInNewTab = false;
+
+    public function getShouldOpenInNewTab(): bool
+    {
+        return $this->shouldOpenInNewTab;
+    }
 
     public function getHeading() : string {
         return $this->heading;
