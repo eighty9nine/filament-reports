@@ -36,7 +36,7 @@ trait HasPageSettings
 
     protected ?int $navigationSort = null;
 
-    protected ?string $navigationGroup = "";
+    protected ?string $navigationGroup = null;
 
     protected ?string $navigationParentItem = null;
 
@@ -196,17 +196,17 @@ trait HasPageSettings
 
     public function getHeading(): string
     {
-        return $this->heading ?? __("Reports");
+        return $this->heading ?? __("filament-reports::menu-page.heading");
     }
 
     public function getNavigationLabel(): string
     {
-        return $this->navigationLabel ?? __("Reports");
+        return $this->navigationLabel ?? __("filament-reports::menu-page.nav.label");
     }
 
     public function getTitle(): string
     {
-        return $this->title ?? __("Reports");
+        return $this->title ?? __("filament-reports::menu-page.title");
     }
 
     public function getSlug(): string
@@ -231,7 +231,7 @@ trait HasPageSettings
 
     public function getNavigationGroup(): ?string
     {
-        return $this->navigationGroup;
+        return $this->navigationGroup ?? __("filament-reports::menu-page.nav.group");
     }
 
     public function getNavigationParentItem(): ?string

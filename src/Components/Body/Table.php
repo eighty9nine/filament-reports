@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 class Table extends Component
 {
     use Concerns\HasHeadings;
+    use Concerns\HasColumns;
 
     /**
      * @var view-string
@@ -31,6 +32,19 @@ class Table extends Component
 
     public function getData(): Collection
     {
+        if ($this->hasColumns()) {
+            $this->data = $this->data->map(function ($item) {
+                $item = collect($item);
+                $item = $item->only($this->getColumnsByName());
+
+                // Reorder the item values based on the column order
+                $item = $item->sortBy(function ($value, $column) {
+                    return array_search($column, $this->getColumnsByName());
+                });
+
+                return $item;
+            });
+        }
         return $this->data;
     }
 

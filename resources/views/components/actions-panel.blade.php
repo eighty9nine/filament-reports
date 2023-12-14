@@ -12,13 +12,13 @@
             </x-slot>
 
             <x-filament::dropdown.list>
-                <x-filament::dropdown.list.item wire:click="exportToPdf">
+                {{-- <x-filament::dropdown.list.item wire:click="exportToPdf">
                     To PDF
                 </x-filament::dropdown.list.item>
 
                 <x-filament::dropdown.list.item @click="$exportToExcel()">
                     To Excel
-                </x-filament::dropdown.list.item>
+                </x-filament::dropdown.list.item> --}}
 
                 <x-filament::dropdown.list.item @click="$printReport()">
                     Print

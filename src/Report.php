@@ -63,7 +63,7 @@ class Report extends Page implements HasBody, HasHeader, HasFooter, HasActionsPa
     }
 
     public function getGroup() : ?string {
-        return $this->group;
+        return $this->group ?? __("filament-reports::menu-page.nav.group");
     }
 
     public static function getRouteName(?string $panel = null): string

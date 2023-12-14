@@ -19,8 +19,8 @@ class ReportsPlugin implements Plugin
 
         // register reports
         reports()->discoverReports(
-            in: app_path('Filament/Reports'),
-            for: 'App\\Filament\\Reports'
+            in: config("filament-reports.reports_directory"),
+            for: config("filament-reports.reports_namespace")
         );
 
         $panel->discoverPages(

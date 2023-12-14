@@ -13,7 +13,7 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use EightyNine\Reports\Commands\ReportsCommand;
+use EightyNine\Reports\Commands\MakeReportCommand;
 use EightyNine\Reports\Testing\TestsReports;
 
 class ReportsServiceProvider extends PackageServiceProvider
@@ -116,7 +116,7 @@ class ReportsServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            ReportsCommand::class,
+            MakeReportCommand::class,
         ];
     }
 

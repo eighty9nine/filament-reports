@@ -3336,10 +3336,6 @@ html {
   border-top-width: 1px;
 }
 
-.border-t-2 {
-  border-top-width: 2px;
-}
-
 .border-t-4 {
   border-top-width: 4px;
 }
@@ -4179,6 +4175,13 @@ html {
   .pad{
     padding: 0px !important;
   }
+}
+
+#fi-report .fi-ta-text{
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
 :is(.dark .dark\:prose-invert) {
