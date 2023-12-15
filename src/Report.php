@@ -19,8 +19,6 @@ use Filament\Facades\Filament;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
-use Filament\Panel;
-use Illuminate\Support\Facades\Route;
 
 class Report extends Page implements HasBody, HasHeader, HasFooter, HasActionsPanel, HasForms
 {
@@ -31,7 +29,7 @@ class Report extends Page implements HasBody, HasHeader, HasFooter, HasActionsPa
 
     public ?string $heading = "";
 
-    public ?array $sections= ['pad', 'header', 'body', 'footer', 'pad'];
+    public ?array $sections = ['pad', 'header', 'body', 'footer', 'pad'];
 
     public ?string $subHeading = "";
 
@@ -50,19 +48,23 @@ class Report extends Page implements HasBody, HasHeader, HasFooter, HasActionsPa
         return $this->shouldOpenInNewTab;
     }
 
-    public function getHeading() : string {
+    public function getHeading(): string
+    {
         return $this->heading;
     }
 
-    public function getSubHeading() : string {
+    public function getSubHeading(): string
+    {
         return $this->subHeading;
     }
 
-    public function getIcon() : string {
+    public function getIcon(): string
+    {
         return $this->icon;
     }
 
-    public function getGroup() : ?string {
+    public function getGroup(): ?string
+    {
         return $this->group ?? __("filament-reports::menu-page.nav.group");
     }
 
@@ -104,5 +106,4 @@ class Report extends Page implements HasBody, HasHeader, HasFooter, HasActionsPa
     {
         return $footer;
     }
-
 }

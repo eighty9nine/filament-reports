@@ -231,7 +231,7 @@ trait HasPageSettings
 
     public function getNavigationGroup(): ?string
     {
-        return $this->navigationGroup ?? __("filament-reports::menu-page.nav.group");
+        return $this->navigationGroup;
     }
 
     public function getNavigationParentItem(): ?string

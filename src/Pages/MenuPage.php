@@ -84,8 +84,7 @@ class MenuPage extends Page
 
     public static function getNavigationIcon(): ?string
     {
-        return reports()->getNavigationIcon() ??
-            static::$navigationIcon;
+        return reports()->getNavigationIcon() ?? static::$navigationIcon;
     }
 
     public static function getNavigationBadge(): ?string

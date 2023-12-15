@@ -41,16 +41,18 @@ class MakeReportCommand extends Command
 
         $namespace = config("filament-reports.reports_namespace");
 
-        $this->copyStubToApp("ReportPage", $path, [
-            "namespace" => $namespace,
-            "baseReportPage" => "EightyNine\\Reports\\Report",
-            "reportPage" => $report,
-            "baseReportPageClass" => "Report",
-            "reportHeading" => "Report",
-            "reportSubHeading" => "A great report",
-        ]);
+        if (!$this->checkForCollision([$path])) {
+            $this->copyStubToApp("ReportPage", $path, [
+                "namespace" => $namespace,
+                "baseReportPage" => "EightyNine\\Reports\\Report",
+                "reportPage" => $report,
+                "baseReportPageClass" => "Report",
+                "reportHeading" => "Report",
+                "reportSubHeading" => "A great report",
+            ]);
+            $this->components->info("Filament report [{$path}] created successfully.");
+        }
 
-        $this->comment('All done');
 
         return self::SUCCESS;
     }

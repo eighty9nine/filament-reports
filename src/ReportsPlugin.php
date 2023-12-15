@@ -38,7 +38,7 @@ class ReportsPlugin implements Plugin
                 $report = app($report);
                 return NavigationItem::make($report->getTitle())
                     ->url($report->getUrl())
-                    ->group(reports()->getNavigationGroup());
+                    ->group(reports()->getNavigationGroup() ?? __("filament-reports::menu-page.nav.group"));
             })->toArray());
         }
     }
