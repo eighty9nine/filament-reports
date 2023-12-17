@@ -6,7 +6,6 @@ use EightyNine\Reports\Components\Concerns\CanModifyImageWidth;
 
 class Image extends Component
 {
-
     use CanModifyImageWidth;
 
     /**
@@ -29,5 +28,4 @@ class Image extends Component
 
         return $static;
     }
-
 }

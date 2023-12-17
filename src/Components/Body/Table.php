@@ -4,13 +4,12 @@ namespace EightyNine\Reports\Components\Body;
 
 use Closure;
 use EightyNine\Reports\Components\Component;
-use EightyNine\Reports\ReportsManager;
 use Illuminate\Support\Collection;
 
 class Table extends Component
 {
-    use Concerns\HasHeadings;
     use Concerns\HasColumns;
+    use Concerns\HasHeadings;
 
     /**
      * @var view-string
@@ -45,6 +44,7 @@ class Table extends Component
                 return $item;
             });
         }
+
         return $this->data;
     }
 
@@ -60,4 +60,3 @@ class Table extends Component
         return reports()->getFilterState();
     }
 }
-

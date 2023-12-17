@@ -23,42 +23,42 @@ class TextColumn extends Column
      */
     protected string $view = 'filament-tables::columns.text-column';
 
-    protected bool | Closure $canWrap = false;
+    protected bool|Closure $canWrap = false;
 
-    protected bool | Closure $isBadge = false;
+    protected bool|Closure $isBadge = false;
 
-    protected bool | Closure $isBulleted = false;
+    protected bool|Closure $isBulleted = false;
 
-    protected bool | Closure $isListWithLineBreaks = false;
+    protected bool|Closure $isListWithLineBreaks = false;
 
-    protected int | Closure | null $listLimit = null;
+    protected int|Closure|null $listLimit = null;
 
-    protected TextColumnSize | string | Closure | null $size = null;
+    protected TextColumnSize|string|Closure|null $size = null;
 
-    protected bool | Closure $isLimitedListExpandable = false;
+    protected bool|Closure $isLimitedListExpandable = false;
 
-    public function badge(bool | Closure $condition = true): static
+    public function badge(bool|Closure $condition = true): static
     {
         $this->isBadge = $condition;
 
         return $this;
     }
 
-    public function bulleted(bool | Closure $condition = true): static
+    public function bulleted(bool|Closure $condition = true): static
     {
         $this->isBulleted = $condition;
 
         return $this;
     }
 
-    public function listWithLineBreaks(bool | Closure $condition = true): static
+    public function listWithLineBreaks(bool|Closure $condition = true): static
     {
         $this->isListWithLineBreaks = $condition;
 
         return $this;
     }
 
-    public function limitList(int | Closure | null $limit = 3): static
+    public function limitList(int|Closure|null $limit = 3): static
     {
         $this->listLimit = $limit;
 
@@ -82,21 +82,21 @@ class TextColumn extends Column
         return $this;
     }
 
-    public function wrap(bool | Closure $condition = true): static
+    public function wrap(bool|Closure $condition = true): static
     {
         $this->canWrap = $condition;
 
         return $this;
     }
 
-    public function size(TextColumnSize | string | Closure | null $size): static
+    public function size(TextColumnSize|string|Closure|null $size): static
     {
         $this->size = $size;
 
         return $this;
     }
 
-    public function getSize(mixed $state): TextColumnSize | string | null
+    public function getSize(mixed $state): TextColumnSize|string|null
     {
         return $this->evaluate($this->size, [
             'state' => $state,
@@ -128,7 +128,7 @@ class TextColumn extends Column
         return $this->evaluate($this->listLimit);
     }
 
-    public function expandableLimitedList(bool | Closure $condition = true): static
+    public function expandableLimitedList(bool|Closure $condition = true): static
     {
         $this->isLimitedListExpandable = $condition;
 

@@ -3,8 +3,8 @@
 namespace EightyNine\Reports\Components\Body\Concerns;
 
 use Closure;
-use Filament\Support\Contracts\HasLabel as LabelInterface;
 use EightyNine\Reports\Components\Body\TextColumn;
+use Filament\Support\Contracts\HasLabel as LabelInterface;
 use Filament\Tables\Table;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\HtmlString;
@@ -18,23 +18,23 @@ trait CanFormatState
 {
     protected ?Closure $formatStateUsing = null;
 
-    protected int | Closure | null $characterLimit = null;
+    protected int|Closure|null $characterLimit = null;
 
-    protected string | Closure | null $characterLimitEnd = null;
+    protected string|Closure|null $characterLimitEnd = null;
 
-    protected int | Closure | null $wordLimit = null;
+    protected int|Closure|null $wordLimit = null;
 
-    protected string | Closure | null $wordLimitEnd = null;
+    protected string|Closure|null $wordLimitEnd = null;
 
-    protected string | Closure | null $prefix = null;
+    protected string|Closure|null $prefix = null;
 
-    protected string | Closure | null $suffix = null;
+    protected string|Closure|null $suffix = null;
 
-    protected string | Closure | null $timezone = null;
+    protected string|Closure|null $timezone = null;
 
-    protected bool | Closure $isHtml = false;
+    protected bool|Closure $isHtml = false;
 
-    protected bool | Closure $isMarkdown = false;
+    protected bool|Closure $isMarkdown = false;
 
     protected bool $isDate = false;
 
@@ -46,7 +46,7 @@ trait CanFormatState
 
     protected bool $isTime = false;
 
-    public function markdown(bool | Closure $condition = true): static
+    public function markdown(bool|Closure $condition = true): static
     {
         $this->isMarkdown = $condition;
 
@@ -100,7 +100,7 @@ trait CanFormatState
         return $this;
     }
 
-    public function money(string | Closure | null $currency = null, int $divideBy = 0): static
+    public function money(string|Closure|null $currency = null, int $divideBy = 0): static
     {
         $this->isMoney = true;
 
@@ -117,7 +117,7 @@ trait CanFormatState
         return $this;
     }
 
-    public function numeric(int | Closure | null $decimalPlaces = null, string | Closure | null $decimalSeparator = '.', string | Closure | null $thousandsSeparator = ','): static
+    public function numeric(int|Closure|null $decimalPlaces = null, string|Closure|null $decimalSeparator = '.', string|Closure|null $thousandsSeparator = ','): static
     {
         $this->isNumeric = true;
 
@@ -156,14 +156,14 @@ trait CanFormatState
         return $this;
     }
 
-    public function timezone(string | Closure | null $timezone): static
+    public function timezone(string|Closure|null $timezone): static
     {
         $this->timezone = $timezone;
 
         return $this;
     }
 
-    public function limit(int | Closure | null $length = 100, string | Closure | null $end = '...'): static
+    public function limit(int|Closure|null $length = 100, string|Closure|null $end = '...'): static
     {
         $this->characterLimit = $length;
         $this->characterLimitEnd = $end;
@@ -179,21 +179,21 @@ trait CanFormatState
         return $this;
     }
 
-    public function prefix(string | Closure | null $prefix): static
+    public function prefix(string|Closure|null $prefix): static
     {
         $this->prefix = $prefix;
 
         return $this;
     }
 
-    public function suffix(string | Closure | null $suffix): static
+    public function suffix(string|Closure|null $suffix): static
     {
         $this->suffix = $suffix;
 
         return $this;
     }
 
-    public function html(bool | Closure $condition = true): static
+    public function html(bool|Closure $condition = true): static
     {
         $this->isHtml = $condition;
 
@@ -226,11 +226,11 @@ trait CanFormatState
         }
 
         if (filled($prefix = $this->getPrefix())) {
-            $state = $prefix . $state;
+            $state = $prefix.$state;
         }
 
         if (filled($suffix = $this->getSuffix())) {
-            $state = $state . $suffix;
+            $state = $state.$suffix;
         }
 
         if ($state instanceof HtmlString) {

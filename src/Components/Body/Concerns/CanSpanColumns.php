@@ -33,7 +33,7 @@ trait CanSpanColumns
     /**
      * @param  array<string, int | string | Closure | null> | int | string | Closure | null  $span
      */
-    public function columnSpan(array | int | string | Closure | null $span): static
+    public function columnSpan(array|int|string|Closure|null $span): static
     {
         if (! is_array($span)) {
             $span = [
@@ -59,7 +59,7 @@ trait CanSpanColumns
     /**
      * @param  array<string, int | string | Closure | null> | int | string | Closure | null  $start
      */
-    public function columnStart(array | int | string | Closure | null $start): static
+    public function columnStart(array|int|string|Closure|null $start): static
     {
         if (! is_array($start)) {
             $start = [
@@ -78,7 +78,7 @@ trait CanSpanColumns
     /**
      * @return array<string, int | string | Closure | null> | int | string | null
      */
-    public function getColumnSpan(int | string | null $breakpoint = null): array | int | string | null
+    public function getColumnSpan(int|string|null $breakpoint = null): array|int|string|null
     {
         $span = $this->columnSpan;
 
@@ -87,7 +87,7 @@ trait CanSpanColumns
         }
 
         return array_map(
-            fn (array | int | string | Closure | null $value): array | int | string | null => $this->evaluate($value),
+            fn (array|int|string|Closure|null $value): array|int|string|null => $this->evaluate($value),
             $span,
         );
     }
@@ -95,7 +95,7 @@ trait CanSpanColumns
     /**
      * @return array<string, int | string | Closure | null> | int | string | null
      */
-    public function getColumnStart(int | string | null $breakpoint = null): array | int | string | null
+    public function getColumnStart(int|string|null $breakpoint = null): array|int|string|null
     {
         $start = $this->columnStart;
 
@@ -104,7 +104,7 @@ trait CanSpanColumns
         }
 
         return array_map(
-            fn (array | int | string | Closure | null $value): array | int | string | null => $this->evaluate($value),
+            fn (array|int|string|Closure|null $value): array|int|string|null => $this->evaluate($value),
             $start,
         );
     }

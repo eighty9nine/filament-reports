@@ -10,8 +10,8 @@ use Livewire\Livewire;
 class ReportsManager
 {
     use HasComponents;
-    use HasPageSettings;
     use HasFilterState;
+    use HasPageSettings;
 
     protected array $reports = [];
 
@@ -19,7 +19,7 @@ class ReportsManager
 
     public static function getInstance()
     {
-        if (!self::$instance) {
+        if (! self::$instance) {
             self::$instance = new self();
         }
 

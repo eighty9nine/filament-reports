@@ -1,11 +1,6 @@
 <?php
 
-use EightyNine\Reports\ReportsManager;
 use Filament\Facades\Filament;
-use Filament\Http\Controllers\Auth\EmailVerificationController;
-use Filament\Http\Controllers\Auth\LogoutController;
-use Filament\Http\Controllers\RedirectToHomeController;
-use Filament\Http\Controllers\RedirectToTenantController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('filament.')
@@ -28,7 +23,7 @@ Route::name('filament.')
                         Route::middleware($panel->getAuthMiddleware())
                             ->group(function () use ($panel, $hasTenancy, $tenantRoutePrefix, $tenantSlugAttribute): void {
                                 Route::middleware($hasTenancy ? $panel->getTenantMiddleware() : [])
-                                    ->prefix($hasTenancy ? (($tenantRoutePrefix) ? "{$tenantRoutePrefix}/" : '') . ('{tenant' . (($tenantSlugAttribute) ? ":{$tenantSlugAttribute}" : '') . '}') : '')
+                                    ->prefix($hasTenancy ? (($tenantRoutePrefix) ? "{$tenantRoutePrefix}/" : '').('{tenant'.(($tenantSlugAttribute) ? ":{$tenantSlugAttribute}" : '').'}') : '')
                                     ->group(function () use ($panel): void {
                                         Route::name('reports.')->group(function () use ($panel): void {
                                             foreach (reports()->getReports() as $report) {

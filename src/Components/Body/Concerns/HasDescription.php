@@ -7,11 +7,11 @@ use Illuminate\Contracts\Support\Htmlable;
 
 trait HasDescription
 {
-    protected string | Htmlable | Closure | null $descriptionAbove = null;
+    protected string|Htmlable|Closure|null $descriptionAbove = null;
 
-    protected string | Htmlable | Closure | null $descriptionBelow = null;
+    protected string|Htmlable|Closure|null $descriptionBelow = null;
 
-    public function description(string | Htmlable | Closure | null $description, string | Closure | null $position = 'below'): static
+    public function description(string|Htmlable|Closure|null $description, string|Closure|null $position = 'below'): static
     {
         if ($position == 'above') {
             $this->descriptionAbove = $description;
@@ -22,12 +22,12 @@ trait HasDescription
         return $this;
     }
 
-    public function getDescriptionAbove(): string | Htmlable | null
+    public function getDescriptionAbove(): string|Htmlable|null
     {
         return $this->evaluate($this->descriptionAbove);
     }
 
-    public function getDescriptionBelow(): string | Htmlable | null
+    public function getDescriptionBelow(): string|Htmlable|null
     {
         return $this->evaluate($this->descriptionBelow);
     }

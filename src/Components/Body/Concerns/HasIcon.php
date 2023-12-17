@@ -9,11 +9,11 @@ use Filament\Tables\Columns\Column;
 
 trait HasIcon
 {
-    protected string | bool | Closure | null $icon = null;
+    protected string|bool|Closure|null $icon = null;
 
-    protected IconPosition | string | Closure | null $iconPosition = null;
+    protected IconPosition|string|Closure|null $iconPosition = null;
 
-    public function icon(string | bool | Closure | null $icon): static
+    public function icon(string|bool|Closure|null $icon): static
     {
         $this->icon = $icon;
 
@@ -23,7 +23,7 @@ trait HasIcon
     /**
      * @param  array<mixed> | Closure  $icons
      */
-    public function icons(array | Closure $icons): static
+    public function icons(array|Closure $icons): static
     {
         $this->icon(function (Column $column, $state) use ($icons) {
             $icons = $column->evaluate($icons);
@@ -46,7 +46,7 @@ trait HasIcon
         return $this;
     }
 
-    public function iconPosition(IconPosition | string | Closure | null $iconPosition): static
+    public function iconPosition(IconPosition|string|Closure|null $iconPosition): static
     {
         $this->iconPosition = $iconPosition;
 
@@ -74,7 +74,7 @@ trait HasIcon
         return $state->getIcon();
     }
 
-    public function getIconPosition(): IconPosition | string
+    public function getIconPosition(): IconPosition|string
     {
         return $this->evaluate($this->iconPosition) ?? IconPosition::Before;
     }

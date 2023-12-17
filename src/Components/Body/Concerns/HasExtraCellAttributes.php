@@ -15,7 +15,7 @@ trait HasExtraCellAttributes
     /**
      * @param  array<mixed> | Closure  $attributes
      */
-    public function extraCellAttributes(array | Closure $attributes, bool $merge = false): static
+    public function extraCellAttributes(array|Closure $attributes, bool $merge = false): static
     {
         if ($merge) {
             $this->extraCellAttributes[] = $attributes;

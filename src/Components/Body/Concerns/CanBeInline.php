@@ -6,9 +6,9 @@ use Closure;
 
 trait CanBeInline
 {
-    protected bool | Closure $isInline = false;
+    protected bool|Closure $isInline = false;
 
-    public function inline(bool | Closure $condition = true): static
+    public function inline(bool|Closure $condition = true): static
     {
         $this->isInline = $condition;
 

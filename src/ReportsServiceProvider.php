@@ -2,6 +2,8 @@
 
 namespace EightyNine\Reports;
 
+use EightyNine\Reports\Commands\MakeReportCommand;
+use EightyNine\Reports\Testing\TestsReports;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
@@ -13,8 +15,6 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use EightyNine\Reports\Commands\MakeReportCommand;
-use EightyNine\Reports\Testing\TestsReports;
 
 class ReportsServiceProvider extends PackageServiceProvider
 {
@@ -38,7 +38,7 @@ class ReportsServiceProvider extends PackageServiceProvider
                     ->askToRunMigrations()
                     ->askToStarRepoOnGitHub('eightynine/filament-reports');
             });
-            $package->hasRoute("/web");
+        $package->hasRoute('/web');
 
         $configFileName = $package->shortName();
 
@@ -82,7 +82,7 @@ class ReportsServiceProvider extends PackageServiceProvider
 
         // Handle Stubs
         if (app()->runningInConsole()) {
-            foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
+            foreach (app(Filesystem::class)->files(__DIR__.'/../stubs/') as $file) {
                 $this->publishes([
                     $file->getRealPath() => base_path("stubs/filament-reports/{$file->getFilename()}"),
                 ], 'filament-reports-stubs');
@@ -105,8 +105,8 @@ class ReportsServiceProvider extends PackageServiceProvider
     {
         return [
             // AlpineComponent::make('filament-reports', __DIR__ . '/../resources/dist/components/filament-reports.js'),
-            Css::make('filament-reports-styles', __DIR__ . '/../resources/dist/filament-reports.css'),
-            Js::make('filament-reports-scripts', __DIR__ . '/../resources/dist/filament-reports.js'),
+            Css::make('filament-reports-styles', __DIR__.'/../resources/dist/filament-reports.css'),
+            Js::make('filament-reports-scripts', __DIR__.'/../resources/dist/filament-reports.js'),
         ];
     }
 

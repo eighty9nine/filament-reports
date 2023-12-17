@@ -6,18 +6,18 @@ use Closure;
 
 trait CanOpenUrl
 {
-    protected bool | Closure $shouldOpenUrlInNewTab = false;
+    protected bool|Closure $shouldOpenUrlInNewTab = false;
 
-    protected string | Closure | null $url = null;
+    protected string|Closure|null $url = null;
 
-    public function openUrlInNewTab(bool | Closure $condition = true): static
+    public function openUrlInNewTab(bool|Closure $condition = true): static
     {
         $this->shouldOpenUrlInNewTab = $condition;
 
         return $this;
     }
 
-    public function url(string | Closure | null $url, bool | Closure $shouldOpenInNewTab = false): static
+    public function url(string|Closure|null $url, bool|Closure $shouldOpenInNewTab = false): static
     {
         $this->openUrlInNewTab($shouldOpenInNewTab);
         $this->url = $url;

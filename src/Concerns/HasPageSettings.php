@@ -7,7 +7,6 @@ use Illuminate\Contracts\View\View;
 
 trait HasPageSettings
 {
-
     protected ?string $navigationLabel = null;
 
     protected ?string $title = null;
@@ -28,7 +27,7 @@ trait HasPageSettings
 
     protected array $headerWidgets = [];
 
-    protected int | array $headerWidgetsColumns = [];
+    protected int|array $headerWidgetsColumns = [];
 
     protected ?string $navigationIcon = null;
 
@@ -40,122 +39,142 @@ trait HasPageSettings
 
     protected ?string $navigationParentItem = null;
 
-    protected string | array | null $navigationBadgeColor = null;
+    protected string|array|null $navigationBadgeColor = null;
 
     protected ?string $navigationBadge = null;
 
     protected bool $useReportListPage = false;
 
-    public function useReportListPage(bool $useReportListPage = true){
+    public function useReportListPage(bool $useReportListPage = true)
+    {
         $this->useReportListPage = $useReportListPage;
+
         return $this;
     }
 
     public function navigationLabel(string $label)
     {
         $this->navigationLabel = $label;
+
         return $this;
     }
 
     public function title(string $title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     public function heading(string $heading)
     {
         $this->heading = $heading;
+
         return $this;
     }
 
     public function slug(string $slug)
     {
         $this->slug = $slug;
+
         return $this;
     }
 
     public function subHeading(string $subheading)
     {
         $this->subheading = $subheading;
+
         return $this;
     }
 
     public function header(string $header)
     {
         $this->header = $header;
+
         return $this;
     }
 
     public function footer(string $footer)
     {
         $this->footer = $footer;
+
         return $this;
     }
 
     public function maxContentWidth(MaxWidth $maxContentWidth)
     {
         $this->maxContentWidth = $maxContentWidth;
+
         return $this;
     }
 
     public function headerActtions(array $headerActions)
     {
         $this->headerActions = $headerActions;
+
         return $this;
     }
 
     public function headerWidgets(array $headerWidgets)
     {
         $this->headerWidgets = $headerWidgets;
+
         return $this;
     }
 
     public function headerWidgetsColumns(int|array $headerWidgetsColumns)
     {
         $this->headerWidgetsColumns = $headerWidgetsColumns;
+
         return $this;
     }
 
     public function navigationIcon(string $navigationIcon)
     {
         $this->navigationIcon = $navigationIcon;
+
         return $this;
     }
 
     public function activeNavigationIcon(string $activeNavigationIcon)
     {
         $this->activeNavigationIcon = $activeNavigationIcon;
+
         return $this;
     }
 
     public function navigationSort(int $navigationSort)
     {
         $this->navigationSort = $navigationSort;
+
         return $this;
     }
 
     public function navigationGroup(string $navigationGroup)
     {
         $this->navigationGroup = $navigationGroup;
+
         return $this;
     }
 
     public function navigationParentItem(string $navigationParentItem)
     {
         $this->navigationParentItem = $navigationParentItem;
+
         return $this;
     }
 
     public function navigationBadge(string $navigationBadge)
     {
         $this->navigationBadge = $navigationBadge;
+
         return $this;
     }
 
     public function navigationBadgeColor(string|array|null $navigationBadgeColor)
     {
         $this->navigationBadgeColor = $navigationBadgeColor;
+
         return $this;
     }
 
@@ -196,22 +215,22 @@ trait HasPageSettings
 
     public function getHeading(): string
     {
-        return $this->heading ?? __("filament-reports::menu-page.heading");
+        return $this->heading ?? __('filament-reports::menu-page.heading');
     }
 
     public function getNavigationLabel(): string
     {
-        return $this->navigationLabel ?? __("filament-reports::menu-page.nav.label");
+        return $this->navigationLabel ?? __('filament-reports::menu-page.nav.label');
     }
 
     public function getTitle(): string
     {
-        return $this->title ?? __("filament-reports::menu-page.title");
+        return $this->title ?? __('filament-reports::menu-page.title');
     }
 
     public function getSlug(): string
     {
-        return $this->slug ?? "reports";
+        return $this->slug ?? 'reports';
     }
 
     public function getActiveNavigationIcon(): ?string
@@ -239,7 +258,7 @@ trait HasPageSettings
         return $this->navigationParentItem;
     }
 
-    public function getNavigationBadgeColor(): string | array | null
+    public function getNavigationBadgeColor(): string|array|null
     {
         return $this->navigationBadgeColor;
     }

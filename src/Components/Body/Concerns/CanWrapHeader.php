@@ -6,9 +6,9 @@ use Closure;
 
 trait CanWrapHeader
 {
-    protected bool | Closure $isHeaderWrapped = false;
+    protected bool|Closure $isHeaderWrapped = false;
 
-    public function wrapHeader(bool | Closure $condition = true): static
+    public function wrapHeader(bool|Closure $condition = true): static
     {
         $this->isHeaderWrapped = $condition;
 

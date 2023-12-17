@@ -6,7 +6,6 @@ use EightyNine\Reports\ComponentContainer;
 use EightyNine\Reports\Contracts\HasBody;
 use EightyNine\Reports\Contracts\HasFooter;
 use EightyNine\Reports\Contracts\HasHeader;
-use Filament\Support\Components\ViewComponent;
 
 class Body extends ComponentContainer
 {

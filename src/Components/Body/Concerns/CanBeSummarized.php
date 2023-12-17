@@ -15,7 +15,7 @@ trait CanBeSummarized
     /**
      * @param  array<Summarizer> | Summarizer  $summarizers
      */
-    public function summarize(array | Summarizer $summarizers): static
+    public function summarize(array|Summarizer $summarizers): static
     {
         foreach (Arr::wrap($summarizers) as $summarizer) {
             $summarizer->column($this);

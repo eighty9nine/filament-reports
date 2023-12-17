@@ -8,7 +8,7 @@ use EightyNine\Reports\Components\Concerns\CanBeAligned;
 class HeaderRow extends Component
 {
     use CanBeAligned;
-    
+
     /**
      * @var view-string
      */

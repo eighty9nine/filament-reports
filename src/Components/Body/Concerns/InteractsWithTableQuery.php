@@ -28,7 +28,7 @@ trait InteractsWithTableQuery
         return $this;
     }
 
-    public function applyRelationshipAggregates(EloquentBuilder | Relation $query): EloquentBuilder | Relation
+    public function applyRelationshipAggregates(EloquentBuilder|Relation $query): EloquentBuilder|Relation
     {
         return $query->when(
             filled([$this->getRelationshipToAvg(), $this->getColumnToAvg()]),
@@ -51,7 +51,7 @@ trait InteractsWithTableQuery
         );
     }
 
-    public function applyEagerLoading(EloquentBuilder | Relation $query): EloquentBuilder | Relation
+    public function applyEagerLoading(EloquentBuilder|Relation $query): EloquentBuilder|Relation
     {
         if (! $this->queriesRelationships($query->getModel())) {
             return $query;
@@ -144,7 +144,7 @@ trait InteractsWithTableQuery
     /**
      * @param  array<string> | null  $relationships
      */
-    protected function getSortColumnForQuery(EloquentBuilder $query, string $sortColumn, ?array $relationships = null): string | Builder
+    protected function getSortColumnForQuery(EloquentBuilder $query, string $sortColumn, ?array $relationships = null): string|Builder
     {
         $relationships ??= ($relationshipName = $this->getRelationshipName()) ?
             explode('.', $relationshipName) :

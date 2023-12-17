@@ -5,6 +5,7 @@ namespace EightyNine\Reports\Commands;
 use Filament\Support\Commands\Concerns\CanIndentStrings;
 use Filament\Support\Commands\Concerns\CanManipulateFiles;
 use Illuminate\Console\Command;
+
 use function Laravel\Prompts\text;
 
 class MakeReportCommand extends Command
@@ -34,25 +35,24 @@ class MakeReportCommand extends Command
 
         $path = (string) str($report)
             ->prepend('/')
-            ->prepend(config("filament-reports.reports_directory"))
+            ->prepend(config('filament-reports.reports_directory'))
             ->replace('\\', '/')
             ->replace('//', '/')
             ->append('.php');
 
-        $namespace = config("filament-reports.reports_namespace");
+        $namespace = config('filament-reports.reports_namespace');
 
-        if (!$this->checkForCollision([$path])) {
-            $this->copyStubToApp("ReportPage", $path, [
-                "namespace" => $namespace,
-                "baseReportPage" => "EightyNine\\Reports\\Report",
-                "reportPage" => $report,
-                "baseReportPageClass" => "Report",
-                "reportHeading" => "Report",
-                "reportSubHeading" => "A great report",
+        if (! $this->checkForCollision([$path])) {
+            $this->copyStubToApp('ReportPage', $path, [
+                'namespace' => $namespace,
+                'baseReportPage' => 'EightyNine\\Reports\\Report',
+                'reportPage' => $report,
+                'baseReportPageClass' => 'Report',
+                'reportHeading' => 'Report',
+                'reportSubHeading' => 'A great report',
             ]);
             $this->components->info("Filament report [{$path}] created successfully.");
         }
-
 
         return self::SUCCESS;
     }

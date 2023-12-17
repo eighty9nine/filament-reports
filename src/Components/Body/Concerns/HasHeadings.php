@@ -4,7 +4,6 @@ namespace EightyNine\Reports\Components\Body\Concerns;
 
 trait HasHeadings
 {
-
     protected ?array $headings = [];
 
     protected bool $hasHeadings = false;
@@ -18,6 +17,7 @@ trait HasHeadings
             ->map(fn ($key) => ucwords($key))
             ->toArray();
         $this->hasHeadings = true;
+
         return $this;
     }
 
@@ -25,12 +25,14 @@ trait HasHeadings
     {
         $this->headings = $this->data->shift();
         $this->hasHeadings = true;
+
         return $this;
     }
 
     public function useFirstColumnAsHeadings()
     {
         $this->firstColumnAsHeadings = true;
+
         return $this;
     }
 
@@ -47,6 +49,7 @@ trait HasHeadings
     public function getHeadings(): array
     {
         $this->hasHeadings = true;
+
         return $this->headings;
     }
 }

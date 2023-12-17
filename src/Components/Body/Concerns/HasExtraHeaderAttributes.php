@@ -15,7 +15,7 @@ trait HasExtraHeaderAttributes
     /**
      * @param  array<mixed> | Closure  $attributes
      */
-    public function extraHeaderAttributes(array | Closure $attributes, bool $merge = false): static
+    public function extraHeaderAttributes(array|Closure $attributes, bool $merge = false): static
     {
         if ($merge) {
             $this->extraHeaderAttributes[] = $attributes;
