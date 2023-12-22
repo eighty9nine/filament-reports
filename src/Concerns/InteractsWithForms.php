@@ -258,7 +258,7 @@ trait InteractsWithForms
         }
     }
 
-    protected function cacheForm(string $name, Form | Closure | null $form): ?Form
+    protected function cacheForm(string $name, Form|Closure|null $form): ?Form
     {
         $this->isCachingForms = true;
 
@@ -284,7 +284,7 @@ trait InteractsWithForms
 
         $this->cachedForms = collect($this->getForms())
             ->merge($this->getTraitForms())
-            ->mapWithKeys(function (Form | string | null $form, string | int $formName): array {
+            ->mapWithKeys(function (Form|string|null $form, string|int $formName): array {
                 if ($form === null) {
                     return ['' => null];
                 }
@@ -326,7 +326,7 @@ trait InteractsWithForms
         $forms = [];
 
         foreach (class_uses_recursive($class = static::class) as $trait) {
-            if (method_exists($class, $method = 'get' . class_basename($trait) . 'Forms')) {
+            if (method_exists($class, $method = 'get'.class_basename($trait).'Forms')) {
                 $forms = [
                     ...$forms,
                     ...$this->{$method}(),
@@ -381,7 +381,7 @@ trait InteractsWithForms
     /**
      * @deprecated Override the `form()` method to configure the default form.
      */
-    protected function getFormModel(): Model | string | null
+    protected function getFormModel(): Model|string|null
     {
         return null;
     }

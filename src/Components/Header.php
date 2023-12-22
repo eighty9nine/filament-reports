@@ -6,5 +6,4 @@ use EightyNine\Reports\ComponentContainer;
 
 class Header extends ComponentContainer
 {
-
 }

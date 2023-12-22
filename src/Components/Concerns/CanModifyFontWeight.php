@@ -6,7 +6,6 @@ use EightyNine\Reports\Enums\FontWeight;
 
 trait CanModifyFontWeight
 {
-
     protected FontWeight $fontWeight = FontWeight::Normal;
 
     public function fontWeight(FontWeight $fontWeight): static

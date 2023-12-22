@@ -2,7 +2,6 @@
 
 namespace EightyNine\Reports\Pages;
 
-use EightyNine\Reports\ReportsManager;
 use Filament\Pages\Page;
 use Filament\Support\Enums\MaxWidth;
 use Illuminate\Contracts\View\View;
@@ -12,7 +11,6 @@ class MenuPage extends Page
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $view = 'filament-reports::pages.menu-page';
-
 
     public static function shouldRegisterNavigation(): bool
     {
@@ -28,7 +26,6 @@ class MenuPage extends Page
     {
         return reports()->getTitle();
     }
-
 
     public static function getSlug(): string
     {
@@ -65,7 +62,7 @@ class MenuPage extends Page
         return reports()->getHeaderActions();
     }
 
-    public function getHeaderWidgetsColumns(): int | array
+    public function getHeaderWidgetsColumns(): int|array
     {
         return reports()->getHeaderWidgetsColumns();
     }
@@ -92,7 +89,7 @@ class MenuPage extends Page
         return reports()->getNavigationBadge();
     }
 
-    public static function getNavigationBadgeColor(): string | array | null
+    public static function getNavigationBadgeColor(): string|array|null
     {
         return reports()->getNavigationBadgeColor();
     }

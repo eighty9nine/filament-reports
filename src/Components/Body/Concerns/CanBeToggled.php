@@ -6,11 +6,11 @@ use Closure;
 
 trait CanBeToggled
 {
-    protected bool | Closure $isToggleable = false;
+    protected bool|Closure $isToggleable = false;
 
-    protected bool | Closure $isToggledHiddenByDefault = false;
+    protected bool|Closure $isToggledHiddenByDefault = false;
 
-    public function toggleable(bool | Closure $condition = true, bool | Closure $isToggledHiddenByDefault = false): static
+    public function toggleable(bool|Closure $condition = true, bool|Closure $isToggledHiddenByDefault = false): static
     {
         $this->isToggleable = $condition;
         $this->toggledHiddenByDefault($isToggledHiddenByDefault);
@@ -18,7 +18,7 @@ trait CanBeToggled
         return $this;
     }
 
-    public function toggledHiddenByDefault(bool | Closure $condition = true): static
+    public function toggledHiddenByDefault(bool|Closure $condition = true): static
     {
         $this->isToggledHiddenByDefault = $condition;
 

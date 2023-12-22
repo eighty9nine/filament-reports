@@ -24,18 +24,18 @@ trait EntanglesStateWithSingularRelationship
 
     protected ?Closure $mutateRelationshipDataBeforeSaveUsing = null;
 
-    public function relationship(string $name, bool | Closure $condition = true): static
+    public function relationship(string $name, bool|Closure $condition = true): static
     {
         $this->relationship = $name;
         $this->statePath($name);
 
-        $this->loadStateFromRelationshipsUsing(static function (Component | CanEntangleWithSingularRelationships $component) {
+        $this->loadStateFromRelationshipsUsing(static function (Component|CanEntangleWithSingularRelationships $component) {
             $component->clearCachedExistingRecord();
 
             $component->fillFromRelationship();
         });
 
-        $this->saveRelationshipsBeforeChildrenUsing(static function (Component | CanEntangleWithSingularRelationships $component, HasForms $livewire) use ($condition): void {
+        $this->saveRelationshipsBeforeChildrenUsing(static function (Component|CanEntangleWithSingularRelationships $component, HasForms $livewire) use ($condition): void {
             $record = $component->getCachedExistingRecord();
 
             if (! $component->evaluate($condition)) {
@@ -73,7 +73,7 @@ trait EntanglesStateWithSingularRelationship
             $component->cachedExistingRecord($record);
         });
 
-        $this->saveRelationshipsUsing(static function (Component | CanEntangleWithSingularRelationships $component, HasForms $livewire) use ($condition): void {
+        $this->saveRelationshipsUsing(static function (Component|CanEntangleWithSingularRelationships $component, HasForms $livewire) use ($condition): void {
             if (! $component->evaluate($condition)) {
                 return;
             }
@@ -169,7 +169,7 @@ trait EntanglesStateWithSingularRelationship
         return $container->model($this->getCachedExistingRecord() ?? $this->getRelatedModel());
     }
 
-    public function getRelationship(): BelongsTo | HasOne | MorphOne | null
+    public function getRelationship(): BelongsTo|HasOne|MorphOne|null
     {
         $name = $this->getRelationshipName();
 

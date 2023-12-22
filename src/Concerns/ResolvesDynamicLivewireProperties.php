@@ -11,7 +11,6 @@ use Livewire\Exceptions\PropertyNotFoundException;
 
 trait ResolvesDynamicLivewireProperties
 {
-
     /**
      * @param  string  $property
      *
@@ -21,9 +20,9 @@ trait ResolvesDynamicLivewireProperties
     {
         // dd($property, $this instanceof HasFooter );
         return match ($property) {
-            'header', $this instanceof HasHeader  => $this->getTableHeader(),
-            'body', $this instanceof HasBody      => $this->getTableBody(),
-            'footer', $this instanceof HasFooter  => $this->getTableFooter(),
+            'header', $this instanceof HasHeader => $this->getTableHeader(),
+            'body', $this instanceof HasBody => $this->getTableBody(),
+            'footer', $this instanceof HasFooter => $this->getTableFooter(),
             'actionsPanel', $this instanceof HasActionsPanel => $this->getActionsPanel(),
             'filterForm', $this instanceof HasForms => $this->getFilterForm(),
             default => throw new PropertyNotFoundException($property, get_class($this)),

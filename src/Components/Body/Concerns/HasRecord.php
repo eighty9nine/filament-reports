@@ -2,8 +2,6 @@
 
 namespace EightyNine\Reports\Components\Body\Concerns;
 
-use Illuminate\Database\Eloquent\Model;
-
 trait HasRecord
 {
     protected mixed $record = null;

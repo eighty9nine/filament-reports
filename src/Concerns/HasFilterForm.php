@@ -2,15 +2,14 @@
 
 namespace EightyNine\Reports\Concerns;
 
-use EightyNine\Reports\ReportsManager;
 use Filament\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Pages\Concerns\InteractsWithFormActions;
 
 trait HasFilterForm
 {
-    use InteractsWithForms;
     use InteractsWithFormActions;
+    use InteractsWithForms;
 
     public ?array $data = [];
 
@@ -49,9 +48,9 @@ trait HasFilterForm
     {
         return [
             Action::make('filter')
-                ->label("Filter")
+                ->label('Filter')
                 ->submit('filter')
-                ->keyBindings(['mod+s'])
+                ->keyBindings(['mod+s']),
         ];
     }
 }

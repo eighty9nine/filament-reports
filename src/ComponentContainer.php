@@ -56,7 +56,7 @@ class ComponentContainer extends ViewComponent
     {
         $record = $this->getRecord();
 
-        if (!$record) {
+        if (! $record) {
             return parent::resolveDefaultClosureDependencyForEvaluationByType($parameterType);
         }
 

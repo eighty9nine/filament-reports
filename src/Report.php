@@ -2,12 +2,10 @@
 
 namespace EightyNine\Reports;
 
-use EightyNine\Reports\Components\ActionsPanel;
 use EightyNine\Reports\Components\Body;
 use EightyNine\Reports\Components\Footer;
 use EightyNine\Reports\Components\Header;
 use EightyNine\Reports\Concerns\HasFilterForm;
-use EightyNine\Reports\Concerns\HasPageSettings;
 use EightyNine\Reports\Concerns\HasReportActions;
 use EightyNine\Reports\Concerns\InteractsWithActionsPanel;
 use EightyNine\Reports\Concerns\ResolvesDynamicLivewireProperties;
@@ -17,29 +15,28 @@ use EightyNine\Reports\Contracts\HasFooter;
 use EightyNine\Reports\Contracts\HasHeader;
 use Filament\Facades\Filament;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
 use Filament\Pages\Page;
 
-class Report extends Page implements HasBody, HasHeader, HasFooter, HasActionsPanel, HasForms
+class Report extends Page implements HasActionsPanel, HasBody, HasFooter, HasForms, HasHeader
 {
-    use ResolvesDynamicLivewireProperties;
-    use InteractsWithActionsPanel;
     use HasFilterForm;
     use HasReportActions;
+    use InteractsWithActionsPanel;
+    use ResolvesDynamicLivewireProperties;
 
-    public ?string $heading = "";
+    public ?string $heading = '';
 
     public ?array $sections = ['pad', 'header', 'body', 'footer', 'pad'];
 
-    public ?string $subHeading = "";
+    public ?string $subHeading = '';
 
-    public ?string $icon = "heroicon-o-document-text";
+    public ?string $icon = 'heroicon-o-document-text';
 
     public static string $view = 'filament-reports::pages.report';
 
     public ?string $group = null;
 
-    public ?string $logo = "/img/logo.png";
+    public ?string $logo = '/img/logo.png';
 
     public bool $shouldOpenInNewTab = false;
 
@@ -65,7 +62,7 @@ class Report extends Page implements HasBody, HasHeader, HasFooter, HasActionsPa
 
     public function getGroup(): ?string
     {
-        return $this->group ?? __("filament-reports::menu-page.nav.group");
+        return $this->group ?? __('filament-reports::menu-page.nav.group');
     }
 
     public static function getRouteName(?string $panel = null): string

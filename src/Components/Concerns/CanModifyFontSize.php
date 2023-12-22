@@ -6,7 +6,6 @@ use EightyNine\Reports\Enums\FontSize;
 
 trait CanModifyFontSize
 {
-
     protected FontSize $fontSize = FontSize::Base;
 
     public function fontSize(FontSize $fontSize): static

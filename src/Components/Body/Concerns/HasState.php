@@ -13,11 +13,11 @@ trait HasState
 
     protected mixed $getStateUsing = null;
 
-    protected string | Closure | null $separator = null;
+    protected string|Closure|null $separator = null;
 
-    protected bool | Closure $isDistinctList = false;
+    protected bool|Closure $isDistinctList = false;
 
-    public function distinctList(bool | Closure $condition = true): static
+    public function distinctList(bool|Closure $condition = true): static
     {
         $this->isDistinctList = $condition;
 
@@ -114,7 +114,7 @@ trait HasState
         return $state->all();
     }
 
-    public function separator(string | Closure | null $separator = ','): static
+    public function separator(string|Closure|null $separator = ','): static
     {
         $this->separator = $separator;
 

@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 
 trait CanCallAction
 {
-    protected Closure | Action | string | null $action = null;
+    protected Closure|Action|string|null $action = null;
 
-    public function action(Closure | Action | string | null $action): static
+    public function action(Closure|Action|string|null $action): static
     {
         if (is_string($action)) {
             $action = function (HasTable $livewire, ?Model $record) use ($action) {
@@ -28,7 +28,7 @@ trait CanCallAction
         return $this;
     }
 
-    public function getAction(): Closure | Action | null
+    public function getAction(): Closure|Action|null
     {
         return $this->action;
     }

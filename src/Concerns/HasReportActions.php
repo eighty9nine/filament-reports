@@ -4,8 +4,6 @@ namespace EightyNine\Reports\Concerns;
 
 trait HasReportActions
 {
-
-
     public function print()
     {
     }

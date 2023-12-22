@@ -3,6 +3,7 @@
 namespace Filament\Tables\Columns\Concerns;
 
 namespace EightyNine\Reports\Components\Body\Concerns;
+
 use Closure;
 use Illuminate\Support\Arr;
 
@@ -21,13 +22,13 @@ trait CanBeSearchable
 
     protected ?Closure $searchQuery = null;
 
-    protected bool | Closure | null $isSearchForcedCaseInsensitive = null;
+    protected bool|Closure|null $isSearchForcedCaseInsensitive = null;
 
     /**
      * @param  bool | array<string> | string  $condition
      */
     public function searchable(
-        bool | array | string $condition = true,
+        bool|array|string $condition = true,
         ?Closure $query = null,
         bool $isIndividual = false,
         bool $isGlobal = true,
@@ -47,7 +48,7 @@ trait CanBeSearchable
         return $this;
     }
 
-    public function forceSearchCaseInsensitive(bool | Closure | null $condition = true): static
+    public function forceSearchCaseInsensitive(bool|Closure|null $condition = true): static
     {
         $this->isSearchForcedCaseInsensitive = $condition;
 

@@ -6,18 +6,18 @@ use Closure;
 
 trait CanBeDisabled
 {
-    protected bool | Closure $isDisabled = false;
+    protected bool|Closure $isDisabled = false;
 
-    protected bool | Closure $isClickDisabled = false;
+    protected bool|Closure $isClickDisabled = false;
 
-    public function disabled(bool | Closure $condition = true): static
+    public function disabled(bool|Closure $condition = true): static
     {
         $this->isDisabled = $condition;
 
         return $this;
     }
 
-    public function disabledClick(bool | Closure $condition = true): static
+    public function disabledClick(bool|Closure $condition = true): static
     {
         $this->isClickDisabled = $condition;
 
@@ -27,7 +27,7 @@ trait CanBeDisabled
     /**
      * @deprecated Use `disabledClick()` instead.
      */
-    public function disableClick(bool | Closure $condition = true): static
+    public function disableClick(bool|Closure $condition = true): static
     {
         $this->disabledClick($condition);
 

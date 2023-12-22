@@ -6,9 +6,9 @@ use Closure;
 
 trait CanGrow
 {
-    protected bool | Closure | null $canGrow = null;
+    protected bool|Closure|null $canGrow = null;
 
-    public function grow(bool | Closure | null $condition = true): static
+    public function grow(bool|Closure|null $condition = true): static
     {
         $this->canGrow = $condition;
 

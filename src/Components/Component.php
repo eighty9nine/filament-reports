@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Component extends ViewComponent
 {
     use Concerns\BelongsToContainer;
-    use Concerns\HasChildComponents;
     use Concerns\CanBeHidden;
+    use Concerns\HasChildComponents;
 
     protected string $evaluationIdentifier = 'component';
 

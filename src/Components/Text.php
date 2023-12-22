@@ -5,13 +5,12 @@ namespace EightyNine\Reports\Components;
 use EightyNine\Reports\Components\Concerns\CanModifyColor;
 use EightyNine\Reports\Components\Concerns\CanModifyFontSize;
 use EightyNine\Reports\Components\Concerns\CanModifyFontWeight;
-use Filament\Support\Concerns\HasColor;
 
 class Text extends Component
 {
+    use CanModifyColor;
     use CanModifyFontSize;
     use CanModifyFontWeight;
-    use CanModifyColor;
 
     /**
      * @var view-string
@@ -38,6 +37,7 @@ class Text extends Component
     {
         $this->font3Xl();
         $this->fontExtraBold();
+
         return $this;
     }
 
@@ -45,6 +45,7 @@ class Text extends Component
     {
         $this->fontSm();
         $this->fontLight();
+
         return $this;
     }
 }
