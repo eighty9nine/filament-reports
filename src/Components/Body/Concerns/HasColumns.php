@@ -33,17 +33,17 @@ trait HasColumns
 
     public function getColumnByName(string $name): mixed
     {
-        return collect($this->columns)->first(fn($column) => $column->getName() === $name);
+        return collect($this->columns)->first(fn ($column) => $column->getName() === $name);
     }
 
     public function getColumnsByName()
     {
-        return collect($this->columns)->map(fn($column) => $column->getName())->toArray();
+        return collect($this->columns)->map(fn ($column) => $column->getName())->toArray();
     }
 
     public function hasSummary()
     {
         return collect($this->columns)
-            ->first(fn($column) => $column->hasSum()) !== null;
+            ->first(fn ($column) => $column->hasSum()) !== null;
     }
 }
