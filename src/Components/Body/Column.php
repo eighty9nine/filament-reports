@@ -14,7 +14,6 @@ class Column extends ViewComponent
 {
     use BelongsToLayout;
     use Concerns\BelongsToTable;
-    use Concerns\CanAggregateRelatedModels;
     use Concerns\CanBeDisabled;
     use Concerns\CanBeHidden;
     use Concerns\CanBeInline;

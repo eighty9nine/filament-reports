@@ -45,6 +45,7 @@ class Table extends Component
                 return $item;
             });
         }
+
         return $this->data;
     }
 

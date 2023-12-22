@@ -5,9 +5,10 @@
     $isFirstColumnUsedAsHeadings = $isFirstColumnUsedAsHeadings();
     $columns = $getColumns();
     $hasColumns = $hasColumns();
+    $hasSummary = $hasSummary();
 @endphp
 <x-filament-reports::table.index class="border-t-4 border-primary-500"
-    style="width: 100%;
+                                 style="width: 100%;
 border-bottom: 1px solid rgb(210, 210, 210);">
 
     <x-filament-reports::table.head>
@@ -81,8 +82,10 @@ border-bottom: 1px solid rgb(210, 210, 210);">
                                 padding-bottom: 4px;
                                 {{ $loop->parent->last ? 'border-bottom: 1px solid #aaa;' : 'border-bottom: 1px solid #eee;' }}
                                 ">
-                            <x-filament-tables::columns.column :column="$column" :is-click-disabled="$column->isClickDisabled()" :record="$row"
-                                :record-key="$loop->iteration" />
+                            <x-filament-tables::columns.column :column="$column"
+                                                               :is-click-disabled="$column->isClickDisabled()"
+                                                               :record="$row"
+                                                               :record-key="$loop->iteration" />
                         </x-filament-reports::table.cell>
                         {{-- @endforeach --}}
                     @else
@@ -106,4 +109,32 @@ border-bottom: 1px solid rgb(210, 210, 210);">
             </x-filament-reports::table.row>
         @endforeach
     </x-filament-reports::table.body>
+    @if($hasSummary)
+        <x-filament-reports::table.foot>
+            <x-filament-reports::table.row>
+                @foreach($columns as $column)
+                    @if($column->hasSum())
+                        <x-filament-reports::table.cell style="
+                        padding-left: 8px;
+                        padding-right: 8px;
+                        padding-top: 4px;
+                        padding-bottom: 4px;
+                        border-bottom: 1px solid #aaa;
+                        border-top: 1px solid #aaa;
+                        text-align: left;
+                        font-weight: bold;">
+                            <span style="
+                            font-size: 12px;
+                        ">
+                            {{ $column->formatState($data->sum($column->getLabel())) }}
+                            </span>
+                        </x-filament-reports::table.cell>
+                    @else
+                        <x-filament-reports::table.cell>
+                        </x-filament-reports::table.cell>
+                    @endif
+                @endforeach
+            </x-filament-reports::table.row>
+        </x-filament-reports::table.foot>
+    @endif
 </x-filament-reports::table.index>

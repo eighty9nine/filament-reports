@@ -17,6 +17,7 @@ class TextColumn extends Column
     use Concerns\HasIcon;
     use Concerns\HasIconColor;
     use Concerns\HasWeight;
+    use Concerns\HasSum;
 
     /**
      * @var view-string
