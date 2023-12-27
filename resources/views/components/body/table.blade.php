@@ -31,17 +31,35 @@ border-bottom: 1px solid rgb(210, 210, 210);">
                     @endforeach
                 @else
                     @foreach ($columns as $column)
+                        @php
+
+                            $alignment = $column->getAlignment() ?? \Filament\Support\Enums\Alignment::Start;
+                            if (! $alignment instanceof \Filament\Support\Enums\Alignment) {
+                                $alignment = filled($alignment) ? (\Filament\Support\Enums\Alignment::tryFrom($alignment) ?? $alignment) : null;
+                            }
+                            $columnClasses = \Illuminate\Support\Arr::toCssClasses([
+                                match ($alignment) {
+                                    \Filament\Support\Enums\Alignment::Start => 'justify-start text-start',
+                                    \Filament\Support\Enums\Alignment::Center => 'justify-center text-center',
+                                    \Filament\Support\Enums\Alignment::End => 'justify-end text-end',
+                                    \Filament\Support\Enums\Alignment::Left => 'justify-start text-left',
+                                    \Filament\Support\Enums\Alignment::Right => 'justify-end text-right',
+                                    \Filament\Support\Enums\Alignment::Justify => 'justify-between text-justify',
+                                    default => $alignment,
+                                },
+                            ]);
+                        @endphp
                         <x-filament-reports::table.head-cell
+                            class="{{ $columnClasses }}"
                             style="
-                        padding-left: 8px;
-                        padding-right: 8px;
-                        padding-top: 4px;
-                        padding-bottom: 4px;
-                        border-bottom: 1px solid #aaa;
-                        border-top: 1px solid #aaa;
-                        text-align: left;
-                        font-weight: bold;
-                    ">
+                                    padding-left: 8px;
+                                    padding-right: 8px;
+                                    padding-top: 4px;
+                                    padding-bottom: 4px;
+                                    border-bottom: 1px solid #aaa;
+                                    border-top: 1px solid #aaa;
+                                    font-weight: bold;
+                                ">
                             {{ str($column->getLabel())->title() }}</x-filament-reports::table.head-cell>
                     @endforeach
                 @endunless
@@ -113,20 +131,40 @@ border-bottom: 1px solid rgb(210, 210, 210);">
         <x-filament-reports::table.foot>
             <x-filament-reports::table.row>
                 @foreach($columns as $column)
+
+                    @php
+
+                        $alignment = $column->getAlignment() ?? \Filament\Support\Enums\Alignment::Start;
+                        if (! $alignment instanceof \Filament\Support\Enums\Alignment) {
+                            $alignment = filled($alignment) ? (\Filament\Support\Enums\Alignment::tryFrom($alignment) ?? $alignment) : null;
+                        }
+                        $columnClasses = \Illuminate\Support\Arr::toCssClasses([
+                            match ($alignment) {
+                                \Filament\Support\Enums\Alignment::Start => 'justify-start text-start',
+                                \Filament\Support\Enums\Alignment::Center => 'justify-center text-center',
+                                \Filament\Support\Enums\Alignment::End => 'justify-end text-end',
+                                \Filament\Support\Enums\Alignment::Left => 'justify-start text-left',
+                                \Filament\Support\Enums\Alignment::Right => 'justify-end text-right',
+                                \Filament\Support\Enums\Alignment::Justify => 'justify-between text-justify',
+                                default => $alignment,
+                            },
+                        ]);
+                    @endphp
                     @if($column->hasSum())
-                        <x-filament-reports::table.cell style="
-                        padding-left: 8px;
-                        padding-right: 8px;
-                        padding-top: 4px;
-                        padding-bottom: 4px;
-                        border-bottom: 1px solid #aaa;
-                        border-top: 1px solid #aaa;
-                        text-align: left;
-                        font-weight: bold;">
+                        <x-filament-reports::table.cell
+                            class="{{ $columnClasses }}"
+                            style="
+                                padding-left: 8px;
+                                padding-right: 8px;
+                                padding-top: 4px;
+                                padding-bottom: 4px;
+                                border-bottom: 1px solid #aaa;
+                                border-top: 1px solid #aaa;
+                                font-weight: bold;">
                             <span style="
                             font-size: 12px;
                         ">
-                            {{ $column->formatState($data->sum($column->getLabel())) }}
+                            {{ $column->formatState($data->sum($column->getName())) }}
                             </span>
                         </x-filament-reports::table.cell>
                     @else
