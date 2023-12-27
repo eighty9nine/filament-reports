@@ -1,15 +1,14 @@
 <x-filament-panels::page>
     <div class="flex flex-row-reverse gap-8">
         {{ $this->actionsPanel}}
-        <x-filament-reports::table.index
+        <x-filament-reports::table.
+            class="bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-900"
             id="fi-report"
             style="
             max-width:100%;
             min-width:75%;
-            background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-            border: 1px solid whitesmoke;
             ">
             @foreach ($this->sections as $section)
                 <x-filament-reports::table.row>
@@ -23,7 +22,7 @@
                         @endif
                     </x-filament-reports::table.cell>
                 </x-filament-reports::table.row>
-            @endforeach
-        </x-filament-reports::table.index>
+                @endforeach
+                </x-filament-reports::table.index>
     </div>
 </x-filament-panels::page>
