@@ -4,7 +4,6 @@ namespace EightyNine\Reports\Components\Body\Layout;
 
 use EightyNine\Reports\Components\Component;
 use EightyNine\Reports\Components\Concerns\CanBeAligned;
-use EightyNine\Reports\Enums\Alignment;
 
 class BodyColumn extends Component
 {

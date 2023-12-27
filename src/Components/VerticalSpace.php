@@ -4,20 +4,21 @@ namespace EightyNine\Reports\Components;
 
 use EightyNine\Reports\Components\Body\view;
 
-class VerticalSpace  extends Component
+class VerticalSpace extends Component
 {
     /**
      * @var view-string
      */
     protected string $view = 'filament-reports::components.vertical-space';
 
-    protected ?string $size = "20px";
+    protected ?string $size = '20px';
 
     public static function make(?string $size = null): static
     {
         $static = app(static::class);
-        if($size)
+        if ($size) {
             $static->size($size);
+        }
 
         return $static;
     }
