@@ -12,6 +12,7 @@ trait HasColumns
     {
         $this->columns = $columns;
         $this->hasColumns = true;
+        $this->hasHeadings = true;
 
         return $this;
     }

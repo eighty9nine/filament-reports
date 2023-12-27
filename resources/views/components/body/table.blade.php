@@ -32,7 +32,6 @@ border-bottom: 1px solid rgb(210, 210, 210);">
                 @else
                     @foreach ($columns as $column)
                         @php
-
                             $alignment = $column->getAlignment() ?? \Filament\Support\Enums\Alignment::Start;
                             if (! $alignment instanceof \Filament\Support\Enums\Alignment) {
                                 $alignment = filled($alignment) ? (\Filament\Support\Enums\Alignment::tryFrom($alignment) ?? $alignment) : null;
