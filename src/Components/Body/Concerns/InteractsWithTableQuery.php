@@ -174,7 +174,7 @@ trait InteractsWithTableQuery
             ->getQuery();
     }
 
-    public function queriesRelationships(Model $record): bool
+    public function queriesRelationships($record): bool
     {
         return false;
     }
