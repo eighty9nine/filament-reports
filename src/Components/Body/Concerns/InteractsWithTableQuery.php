@@ -176,7 +176,7 @@ trait InteractsWithTableQuery
 
     public function queriesRelationships(Model $record): bool
     {
-        return $this->getRelationship($record) !== null;
+        return false;
     }
 
     public function getRelationship(Model $record, ?string $name = null): ?Relation
