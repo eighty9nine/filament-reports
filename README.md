@@ -2,6 +2,8 @@
 
 [Check out the demo here](https://reports-demo.eightynine.dev/demo)
 
+[Full Documentation](https://filament-reports.eightynine.dev/docs)
+
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
 ## Installation
