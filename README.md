@@ -8,16 +8,6 @@ This is where your description should go. Limit it to a paragraph or two. Consid
 
 ## Installation
 
-The package is still private, so you need to add the repository to your composer.json file:
-```json
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:eighty9nine/filament-reports.git"
-        }
-    ]
-```
-
 Then you can install the package via composer:
 
 ```bash
