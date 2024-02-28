@@ -42,7 +42,7 @@ public function panel(Panel $panel): Panel
 ### Create your first report
 The package comes packed with a report creation command, this will create a report in the `app/Filament/Reports` directory.
 ```bash
-php artisan make:report UsersReport
+php artisan make:filament-report UsersReport
 ```
 The command will create a report class with the following structure:
 ```php
