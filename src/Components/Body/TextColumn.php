@@ -6,6 +6,7 @@ use Closure;
 use Filament\Tables\Columns\TextColumn\TextColumnSize;
 use Filament\Tables\Contracts\HasTable;
 use stdClass;
+use Filament\Support\Concerns\HasLineClamp;
 
 class TextColumn extends Column
 {
