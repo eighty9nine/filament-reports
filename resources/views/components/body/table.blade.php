@@ -67,7 +67,7 @@ border-bottom: 1px solid rgb(210, 210, 210);">
         @endif
     </x-filament-reports::table.head>
     <x-filament-reports::table.body>
-        @foreach ($data as $row)
+        @foreach ($data as $rowIndex => $row)
             <x-filament-reports::table.row>
                 @foreach ($row as $key => $cell)
                     @if ($loop->first && $isFirstColumnUsedAsHeadings)
@@ -91,19 +91,42 @@ border-bottom: 1px solid rgb(210, 210, 210);">
                             $column->record($row);
                             $column->rowLoop($loop->parent);
                         @endphp
-                        <x-filament-reports::table.cell
-                            style="
-                                padding-left: 8px;
-                                padding-right: 8px;
-                                padding-top: 4px;
-                                padding-bottom: 4px;
-                                {{ $loop->parent->last ? 'border-bottom: 1px solid #aaa;' : 'border-bottom: 1px solid #eee;' }}
-                                ">
-                            <x-filament-tables::columns.column :column="$column"
-                                                               :is-click-disabled="$column->isClickDisabled()"
-                                                               :record="$row"
-                                                               :record-key="$loop->iteration" />
-                        </x-filament-reports::table.cell>
+                        @if ($column->areRowsGrouped())
+                            @php
+                                $rowspan = $column->areRowsGrouped() ?
+                                    $getNumberOfGroupedCells($rowIndex, $key, $cell) : 1;
+                            @endphp
+                            @if ($isFirstWithinGroup($rowIndex, $key, $cell))
+                                <x-filament-reports::table.cell
+                                    rowspan="{{$rowspan}}"
+                                    style="
+                                        padding-left: 8px;
+                                        padding-right: 8px;
+                                        padding-top: 4px;
+                                        padding-bottom: 4px;
+                                        {{ $loop->parent->last ? 'border-bottom: 1px solid #aaa;' : 'border-bottom: 1px solid #eee;' }}
+                                        ">
+                                    <x-filament-tables::columns.column :column="$column"
+                                                                    :is-click-disabled="$column->isClickDisabled()"
+                                                                    :record="$row"
+                                                                    :record-key="$loop->iteration" />
+                                </x-filament-reports::table.cell>
+                            @endif
+                        @else
+                            <x-filament-reports::table.cell
+                                style="
+                                    padding-left: 8px;
+                                    padding-right: 8px;
+                                    padding-top: 4px;
+                                    padding-bottom: 4px;
+                                    {{ $loop->parent->last ? 'border-bottom: 1px solid #aaa;' : 'border-bottom: 1px solid #eee;' }}
+                                    ">
+                                <x-filament-tables::columns.column :column="$column"
+                                                                :is-click-disabled="$column->isClickDisabled()"
+                                                                :record="$row"
+                                                                :record-key="$loop->iteration" />
+                            </x-filament-reports::table.cell>
+                        @endif
                         {{-- @endforeach --}}
                     @else
                         <x-filament-reports::table.cell

@@ -19,6 +19,7 @@ class TextColumn extends Column
     use Concerns\HasIconColor;
     use Concerns\HasSum;
     use Concerns\HasWeight;
+    use Concerns\CanGroupRows;
     use HasLineClamp;
 
     /**
