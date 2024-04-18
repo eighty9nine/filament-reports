@@ -12,6 +12,7 @@ class TextColumn extends Column
 {
     use Concerns\CanBeCopied;
     use Concerns\CanFormatState;
+    use Concerns\CanGroupRows;
     use Concerns\HasColor;
     use Concerns\HasDescription;
     use Concerns\HasFontFamily;
@@ -19,7 +20,6 @@ class TextColumn extends Column
     use Concerns\HasIconColor;
     use Concerns\HasSum;
     use Concerns\HasWeight;
-    use Concerns\CanGroupRows;
     use HasLineClamp;
 
     /**

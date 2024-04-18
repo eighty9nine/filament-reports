@@ -84,11 +84,11 @@ trait HasColumns
     ) {
         $tableData = $this->data->toArray();
 
-        if($rowIndex == 0){
+        if ($rowIndex == 0) {
             return true;
         }
         try {
-            return !($tableData[$rowIndex - 1][$columnKey] == $columnValue);
+            return ! ($tableData[$rowIndex - 1][$columnKey] == $columnValue);
         } catch (\Throwable $th) {
             return false;
         }
