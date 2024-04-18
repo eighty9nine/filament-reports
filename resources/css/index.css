@@ -2,25 +2,26 @@
 
 @media print {
     .fi-topbar{
-        display: none;
+        display: none !important;
     }
     .fi-sidebar{
-        display: none;
+        display: none !important;
     }
     .fi-reports-action-panel{
-        display: none;
+        display: none !important;
     }
     .fi-header-heading {
-        display: none;
+        display: none !important;
     }
     .fi-header-subheading {
-        display: none;
+        display: none !important;
     }
     #fi-report{
         width: 100%;
         box-shadow: none !important;
         border: none !important; /* Add this line to remove the border */
         border-radius: none !important;
+        display: block !important;
     }
     .pad{
         padding: 0px !important;
