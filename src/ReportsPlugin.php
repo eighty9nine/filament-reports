@@ -24,7 +24,7 @@ class ReportsPlugin implements Plugin
         );
 
         $panel->discoverPages(
-            in: __DIR__.'/Pages',
+            in: __DIR__ . '/Pages',
             for: 'EightyNine\\Reports\\Pages'
         );
     }
@@ -32,12 +32,14 @@ class ReportsPlugin implements Plugin
     public function boot(Panel $panel): void
     {
 
-        if (! reports()->getUseReportListPage()) {
+        if (!reports()->getUseReportListPage()) {
             $panel->navigationItems(collect(reports()->getReports())->map(function ($report) {
                 $report = app($report);
 
                 return NavigationItem::make($report->getTitle())
-                    ->url($report->getUrl())
+                    ->url(function () use ($report) {
+                        return $report->getUrl();
+                    })
                     ->group(reports()->getNavigationGroup() ?? __('filament-reports::menu-page.nav.group'));
             })->toArray());
         }
