@@ -1,6 +1,6 @@
 # Elegant reports in your filament application
 
-[Check out the demo here](https://reports-demo.eightynine.dev/demo)
+[Check out the demo here](https://filament-reports.eightynine.dev/demo)
 
 [Full Documentation](https://filament-reports.eightynine.dev/docs)
 
