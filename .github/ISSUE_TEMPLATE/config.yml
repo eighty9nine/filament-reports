@@ -4,8 +4,8 @@ contact_links:
     url: https://github.com/eightynine/filament-reports/discussions/new?category=q-a
     about: Ask the community for help
   - name: Request a feature
-    url: https://github.com/eightynine/filament-reports/discussions/new?category=ideas
-    about: Share ideas for new features
+    url: https://github.com/eightynine/filament-reports/issues/new?template=feature_request.md
+    about: Suggest an idea for this project
   - name: Report a security issue
     url: https://github.com/eightynine/filament-reports/security/policy
     about: Learn how to notify us for sensitive bugs
