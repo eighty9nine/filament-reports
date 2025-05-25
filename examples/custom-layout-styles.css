@@ -1,0 +1,112 @@
+/* Custom CSS for Filament Reports Equal Height and Width Layouts */
+
+/* Equal Height Columns in Rows */
+.equal-height-row {
+    display: flex !important;
+    align-items: stretch !important;
+    min-height: 200px;
+}
+
+.equal-height-row .fi-body-column {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    height: 100% !important;
+}
+
+.grid-equal-height {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    grid-auto-rows: 1fr !important;
+    gap: 15px !important;
+}
+
+/* Equal Width Items in Columns */
+.equal-width-column {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+}
+
+.equal-width-item {
+    flex: 1 !important;
+    min-width: 0 !important;
+    word-wrap: break-word !important;
+    padding: 10px !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 4px !important;
+}
+
+.grid-equal-width {
+    display: grid !important;
+    grid-template-rows: repeat(auto-fit, 1fr) !important;
+    gap: 10px !important;
+    width: 100% !important;
+}
+
+.percentage-width-column {
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+/* Advanced Layout Combinations */
+.justified-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: stretch !important;
+    min-height: 300px !important;
+}
+
+.justified-layout .fi-body-row {
+    display: flex !important;
+    flex: 1 !important;
+    align-items: stretch !important;
+}
+
+.justified-layout .fi-body-column {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+}
+
+/* Responsive Equal Heights */
+@media (max-width: 768px) {
+    .equal-height-row {
+        flex-direction: column !important;
+    }
+    
+    .grid-equal-height {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Print-specific equal layouts */
+@media print {
+    .equal-height-row,
+    .grid-equal-height {
+        page-break-inside: avoid !important;
+    }
+    
+    .equal-width-item {
+        page-break-inside: avoid !important;
+        orphans: 2 !important;
+        widows: 2 !important;
+    }
+}
+
+/* Utility classes for fine-tuning */
+.stretch-full {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.align-content-stretch {
+    align-content: stretch !important;
+}
+
+.justify-content-stretch {
+    justify-content: stretch !important;
+}
