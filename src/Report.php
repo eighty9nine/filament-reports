@@ -119,6 +119,7 @@ class Report extends Page implements HasActionsPanel, HasBody, HasFooter, HasFor
     public function panels(array $panels): static
     {
         $this->panels = $panels;
+
         return $this;
     }
 

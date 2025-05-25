@@ -12,17 +12,21 @@ use Filament\Support\Enums\MaxWidth;
 class ReportsPlugin implements Plugin
 {
     protected array $allowedReports = [];
+
     protected array $excludedReports = [];
+
     protected ?Closure $reportFilter = null;
 
     public function getId(): string
     {
         return 'filament-reports';
-    }    public function register(Panel $panel): void
+    }
+
+    public function register(Panel $panel): void
     {
         // Check if there's panel-specific configuration
-        $panelReports = config('filament-reports.panel_reports.' . $panel->getId());
-        
+        $panelReports = config('filament-reports.panel_reports.'.$panel->getId());
+
         if ($panelReports) {
             // Use panel-specific directory and namespace
             reports()->discoverReports(
@@ -56,8 +60,8 @@ class ReportsPlugin implements Plugin
                             __('filament-reports::menu-page.nav.group')
                     )
                     ->icon(reports()->getNavigationIcon()),
-            ]);            
-            
+            ]);
+
             $panel->navigationItems(
                 collect(reports()->getReports())
                     ->filter(function ($report) use ($panel) {
@@ -106,7 +110,8 @@ class ReportsPlugin implements Plugin
                             );
                     })
                     ->toArray()
-            );        }
+            );
+        }
     }
 
     public function shouldShowReport(string $reportClass, Panel $panel): bool
@@ -117,19 +122,20 @@ class ReportsPlugin implements Plugin
         }
 
         // If allowed reports are specified, only show those
-        if (!empty($this->allowedReports)) {
+        if (! empty($this->allowedReports)) {
             return in_array($reportClass, $this->allowedReports);
         }
 
         // If excluded reports are specified, hide those
-        if (!empty($this->excludedReports)) {
-            return !in_array($reportClass, $this->excludedReports);
+        if (! empty($this->excludedReports)) {
+            return ! in_array($reportClass, $this->excludedReports);
         }
 
         // Check if report has panel-specific configuration
         $report = app($reportClass);
         if (method_exists($report, 'getPanels')) {
             $allowedPanels = $report->getPanels();
+
             return empty($allowedPanels) || in_array($panel->getId(), $allowedPanels);
         }
 
@@ -142,13 +148,17 @@ class ReportsPlugin implements Plugin
     public function reports(array $reports): static
     {
         $this->allowedReports = $reports;
+
         return $this;
-    }    /**
+    }
+
+    /**
      * Exclude specific reports from this panel
      */
     public function excludeReports(array $reports): static
     {
         $this->excludedReports = $reports;
+
         return $this;
     }
 
@@ -158,6 +168,7 @@ class ReportsPlugin implements Plugin
     public function filterReports(Closure $filter): static
     {
         $this->reportFilter = $filter;
+
         return $this;
     }
 

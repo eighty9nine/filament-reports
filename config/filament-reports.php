@@ -19,7 +19,7 @@ return [
 
     /**
      * Panel-specific report configurations
-     * 
+     *
      * Example:
      * 'panel_reports' => [
      *     'admin' => [

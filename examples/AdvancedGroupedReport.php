@@ -3,8 +3,8 @@
 namespace Examples;
 
 use EightyNine\Reports\Components\Body;
-use EightyNine\Reports\Components\Body\TextColumn;
 use EightyNine\Reports\Components\Body\Table;
+use EightyNine\Reports\Components\Body\TextColumn;
 use EightyNine\Reports\Components\Footer;
 use EightyNine\Reports\Components\Header;
 use EightyNine\Reports\Components\Header\Layout\HeaderColumn;
@@ -13,7 +13,8 @@ use EightyNine\Reports\Report;
 
 class AdvancedGroupedReport extends Report
 {
-    public ?string $heading = "Advanced Grouped Sales Report";
+    public ?string $heading = 'Advanced Grouped Sales Report';
+
     public function header(Header $header): Header
     {
         return $header
@@ -23,9 +24,10 @@ class AdvancedGroupedReport extends Report
                         Text::make('Advanced Sales Report with Multiple Grouping Options')
                             ->title()
                             ->primary(),
-                    ])
+                    ]),
             ]);
     }
+
     public function body(Body $body): Body
     {
         return $body
@@ -52,7 +54,7 @@ class AdvancedGroupedReport extends Report
         $data = $this->prepareSimpleGroupedData();
 
         return Table::make()
-            ->data(fn() => $data)
+            ->data(fn () => $data)
             ->columns([
                 TextColumn::make('is_group')
                     ->label('Group')
@@ -60,19 +62,18 @@ class AdvancedGroupedReport extends Report
                 TextColumn::make('display_name')
                     ->label('Item/Category')
                     ->formatStateUsing(
-                        fn($state, $record) =>
-                        $record['is_group'] ? $state : '  └─ ' . $state
+                        fn ($state, $record) => $record['is_group'] ? $state : '  └─ '.$state
                     )
-                    ->weight(fn($record) => $record['is_group'] ? 'bold' : 'normal')
-                    ->color(fn($record) => $record['is_group'] ? 'primary' : null),
+                    ->weight(fn ($record) => $record['is_group'] ? 'bold' : 'normal')
+                    ->color(fn ($record) => $record['is_group'] ? 'primary' : null),
                 TextColumn::make('amount')
                     ->label('Amount')
-                    ->formatStateUsing(fn($state) => '$' . number_format($state, 2))
-                    ->weight(fn($record) => $record['is_group'] ? 'bold' : 'normal')
+                    ->formatStateUsing(fn ($state) => '$'.number_format($state, 2))
+                    ->weight(fn ($record) => $record['is_group'] ? 'bold' : 'normal')
                     ->alignEnd(),
                 TextColumn::make('quantity')
                     ->label('Qty')
-                    ->formatStateUsing(fn($state) => $state ? number_format($state) : '')
+                    ->formatStateUsing(fn ($state) => $state ? number_format($state) : '')
                     ->alignEnd(),
             ]);
     }
@@ -83,8 +84,9 @@ class AdvancedGroupedReport extends Report
     private function createHierarchicalGroupedTable()
     {
         $data = $this->prepareHierarchicalData();
+
         return Table::make()
-            ->data(fn() => $data)
+            ->data(fn () => $data)
             ->columns([
                 TextColumn::make('display_name')
                     ->label('Category → Subcategory → Item')
@@ -96,22 +98,23 @@ class AdvancedGroupedReport extends Report
                             2 => '└─ 📄 ',
                             default => '  └─ '
                         };
-                        return $indent . $prefix . $state;
+
+                        return $indent.$prefix.$state;
                     })
-                    ->weight(fn($record) => $record['level'] < 2 ? 'bold' : 'normal')
-                    ->color(fn($record) => match ($record['level']) {
+                    ->weight(fn ($record) => $record['level'] < 2 ? 'bold' : 'normal')
+                    ->color(fn ($record) => match ($record['level']) {
                         0 => 'primary',
                         1 => 'secondary',
                         default => null
                     }),
                 TextColumn::make('sales')
                     ->label('Sales')
-                    ->formatStateUsing(fn($state) => $state ? '$' . number_format($state, 2) : '')
-                    ->weight(fn($record) => $record['level'] < 2 ? 'bold' : 'normal')
+                    ->formatStateUsing(fn ($state) => $state ? '$'.number_format($state, 2) : '')
+                    ->weight(fn ($record) => $record['level'] < 2 ? 'bold' : 'normal')
                     ->alignEnd(),
                 TextColumn::make('level')
                     ->label('Level')
-                    ->hidden()
+                    ->hidden(),
             ]);
     }
 
@@ -121,21 +124,22 @@ class AdvancedGroupedReport extends Report
     private function createMultiLevelGroupedTable()
     {
         $data = $this->prepareMultiLevelData();
+
         return Table::make()
-            ->data(fn() => $data)
+            ->data(fn () => $data)
             ->columns([
                 TextColumn::make('item_description')
                     ->label('Description')
                     ->formatStateUsing(function ($state, $record) {
                         return match ($record['type']) {
                             'grand_total' => '═══ GRAND TOTAL ═══',
-                            'category_total' => $record['category'] . ' (Total)',
-                            'subcategory_total' => '  ├─ ' . $record['subcategory'] . ' (Subtotal)',
-                            'item' => '  │  └─ ' . $state,
+                            'category_total' => $record['category'].' (Total)',
+                            'subcategory_total' => '  ├─ '.$record['subcategory'].' (Subtotal)',
+                            'item' => '  │  └─ '.$state,
                             default => $state
                         };
                     })
-                    ->weight(fn($record) => in_array($record['type'], ['grand_total', 'category_total', 'subcategory_total']) ? 'bold' : 'normal')
+                    ->weight(fn ($record) => in_array($record['type'], ['grand_total', 'category_total', 'subcategory_total']) ? 'bold' : 'normal')
                     ->color(function ($record) {
                         return match ($record['type']) {
                             'grand_total' => 'danger',
@@ -146,13 +150,13 @@ class AdvancedGroupedReport extends Report
                     }),
                 TextColumn::make('amount')
                     ->label('Amount')
-                    ->formatStateUsing(fn($state) => '$' . number_format($state, 2))
-                    ->weight(fn($record) => in_array($record['type'], ['grand_total', 'category_total', 'subcategory_total']) ? 'bold' : 'normal')
+                    ->formatStateUsing(fn ($state) => '$'.number_format($state, 2))
+                    ->weight(fn ($record) => in_array($record['type'], ['grand_total', 'category_total', 'subcategory_total']) ? 'bold' : 'normal')
                     ->alignEnd(),
 
                 TextColumn::make('percentage')
                     ->label('% of Total')
-                    ->formatStateUsing(fn($state) => $state ? number_format($state, 1) . '%' : '')
+                    ->formatStateUsing(fn ($state) => $state ? number_format($state, 1).'%' : '')
                     ->alignEnd(),
 
                 TExtColumn::make('type')
@@ -228,7 +232,7 @@ class AdvancedGroupedReport extends Report
             ['name' => 'Rake', 'level' => 2, 'sales' => 300.00],
         ];
 
-        return collect($data)->map(fn($item) => [
+        return collect($data)->map(fn ($item) => [
             'display_name' => $item['name'],
             'sales' => $item['sales'],
             'level' => $item['level'],
@@ -252,7 +256,7 @@ class AdvancedGroupedReport extends Report
             ['item_description' => 'License Sales', 'amount' => 1800.00, 'percentage' => 14.4, 'type' => 'item'],
             ['item_description' => 'Support Contracts', 'amount' => 1200.00, 'percentage' => 9.6, 'type' => 'item'],
 
-            // Category 2  
+            // Category 2
             ['item_description' => '', 'category' => 'Services', 'amount' => 4000.00, 'percentage' => 32.0, 'type' => 'category_total'],
             ['item_description' => '', 'subcategory' => 'Consulting', 'amount' => 2500.00, 'percentage' => 20.0, 'type' => 'subcategory_total'],
             ['item_description' => 'IT Consulting', 'amount' => 1500.00, 'percentage' => 12.0, 'type' => 'item'],

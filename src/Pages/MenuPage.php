@@ -110,14 +110,16 @@ class MenuPage extends Page
     {
         return reports()->getNavigationParentItem() ??
             static::$navigationParentItem;
-    }    public function getReports()
+    }
+
+    public function getReports()
     {
         $reports = reports()->getReports();
-        
+
         // If panel-specific filtering is configured, apply it
         $panel = filament()->getCurrentPanel();
         $plugin = $panel->getPlugin('filament-reports');
-        
+
         if ($plugin && method_exists($plugin, 'shouldShowReport')) {
             $reports = collect($reports)->filter(function ($report) use ($plugin, $panel) {
                 return $plugin->shouldShowReport($report, $panel);

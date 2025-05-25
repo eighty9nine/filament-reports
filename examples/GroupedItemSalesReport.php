@@ -3,8 +3,8 @@
 namespace Examples;
 
 use EightyNine\Reports\Components\Body;
-use EightyNine\Reports\Components\Body\TextColumn;
 use EightyNine\Reports\Components\Body\Table;
+use EightyNine\Reports\Components\Body\TextColumn;
 use EightyNine\Reports\Components\Footer;
 use EightyNine\Reports\Components\Header;
 use EightyNine\Reports\Components\Header\Layout\HeaderColumn;
@@ -15,11 +15,11 @@ use Filament\Forms\Form;
 
 class GroupedItemSalesReport extends Report
 {
-    public ?string $heading = "Item Sales Report by Category";
+    public ?string $heading = 'Item Sales Report by Category';
 
     public ?string $icon = 'heroicon-o-chart-bar';
 
-    public ?string $subHeading = "A report showing sales data grouped by product categories";
+    public ?string $subHeading = 'A report showing sales data grouped by product categories';
 
     public function header(Header $header): Header
     {
@@ -32,7 +32,7 @@ class GroupedItemSalesReport extends Report
                             ->primary(),                        Text::make('A comprehensive report showing sales data organized by product categories with totals')
                             ->subTitle()
                             ->primary(),
-                    ])
+                    ]),
             ]);
     }
 
@@ -48,7 +48,9 @@ class GroupedItemSalesReport extends Report
         ]);
 
         // Transform data to include category totals and group structure
-        $groupedData = $this->prepareGroupedData($items);        return $body
+        $groupedData = $this->prepareGroupedData($items);
+
+        return $body
             ->schema([
                 Table::make()
                     ->data(fn () => $groupedData)
@@ -57,10 +59,10 @@ class GroupedItemSalesReport extends Report
                             ->label('Item')
                             ->groupRows()
                             ->weight('bold', fn ($record) => $record['is_category'] ?? false),
-                        
+
                         TextColumn::make('sales')
                             ->label('Sales')
-                            ->formatStateUsing(fn ($state) => '$' . number_format($state, 2))                            ->weight('bold', fn ($record) => $record['is_category'] ?? false)
+                            ->formatStateUsing(fn ($state) => '$'.number_format($state, 2))->weight('bold', fn ($record) => $record['is_category'] ?? false)
                             ->alignEnd(),
                     ]),
             ]);
@@ -95,7 +97,8 @@ class GroupedItemSalesReport extends Report
 
     /**
      * Prepare data for grouped display with category totals
-     */    private function prepareGroupedData($items)
+     */
+    private function prepareGroupedData($items)
     {
         $grouped = $items->groupBy('category');
         $result = collect();
@@ -103,7 +106,7 @@ class GroupedItemSalesReport extends Report
         foreach ($grouped as $categoryName => $categoryItems) {
             // Calculate category total
             $categoryTotal = $categoryItems->sum('sales');
-            
+
             // Add category header row
             $result->push([
                 'item_name' => $categoryName,
@@ -146,7 +149,7 @@ class GroupedItemSalesReport extends Report
 
         foreach ($grouped as $categoryName => $categoryItems) {
             $categoryTotal = $categoryItems->sum('sales_amount');
-            
+
             // Category header
             $result->push([
                 'item_name' => $categoryName,
