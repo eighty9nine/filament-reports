@@ -4,6 +4,14 @@
 
 [Full Documentation](https://filament-reports.eightynine.dev/docs)
 
+## Requirements
+
+- PHP 8.2 or higher
+- Laravel 10.0, 11.0, or 12.0
+- Filament 3.0 or higher
+
+> **Note:** Laravel 12 support is now available! If you're upgrading from a previous version, please ensure your PHP version is 8.2 or higher as this is required for Laravel 12 compatibility.
+
 ## 🛠️ Be Part of the Journey
 
 Hi, I'm Eighty Nine. I created reports plugin to solve real problems I faced as a developer. Your sponsorship will allow me to dedicate more time to enhancing these tools and helping more people. [Become a sponsor](https://github.com/sponsors/eighty9nine) and join me in making a positive impact on the developer community.
