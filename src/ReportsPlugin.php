@@ -41,8 +41,7 @@ class ReportsPlugin implements Plugin
                             __('filament-reports::menu-page.nav.group')
                     )
                     ->icon(reports()->getNavigationIcon()),
-            ]);
-            $panel->navigationItems(
+            ]);            $panel->navigationItems(
                 collect(reports()->getReports())
                     ->map(function ($report) {
                         $report = app($report);
@@ -50,6 +49,9 @@ class ReportsPlugin implements Plugin
                         return NavigationItem::make($report->getHeading())
                             ->url(function () use ($report) {
                                 return $report->getUrl();
+                            })
+                            ->isActiveWhen(function () use ($report) {
+                                return request()->routeIs($report::getRouteName());
                             })
                             ->parentItem(
                                 get_class($report)::getNavigationParentItem() ??
