@@ -106,6 +106,175 @@ class UserReport extends Report
 }
 
 ````
+
+## Using Reports in Multiple Panels
+
+When working with multiple Filament panels (e.g., admin, customer, manager panels), you may want to display different reports in each panel or share reports across specific panels only. The plugin provides several flexible approaches to achieve this:
+
+### 1. Plugin-Level Filtering
+
+Configure which reports appear in each panel when registering the plugin:
+
+**Allow Only Specific Reports:**
+```php
+// AdminPanelProvider.php
+use EightyNine\Reports\ReportsPlugin;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->id('admin')
+        ->plugins([
+            ReportsPlugin::make()
+                ->reports([
+                    \App\Filament\Reports\UserReport::class,
+                    \App\Filament\Reports\OrderReport::class,
+                    \App\Filament\Reports\FinancialReport::class,
+                ])
+        ]);
+}
+```
+
+**Exclude Specific Reports:**
+```php
+// CustomerPanelProvider.php
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->id('customer')
+        ->plugins([
+            ReportsPlugin::make()
+                ->excludeReports([
+                    \App\Filament\Reports\AdminReport::class,
+                    \App\Filament\Reports\SystemReport::class,
+                ])
+        ]);
+}
+```
+
+**Custom Filter Logic:**
+```php
+// ManagerPanelProvider.php
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->id('manager')
+        ->plugins([
+            ReportsPlugin::make()
+                ->filterReports(function (string $reportClass, Panel $panel) {
+                    $report = app($reportClass);
+                    // Only show sales and finance reports to managers
+                    return in_array($report->group, ['sales', 'finance']);
+                })
+        ]);
+}
+```
+
+### 2. Report-Level Panel Configuration
+
+Configure directly in your report class which panels it should appear in:
+
+```php
+<?php
+
+namespace App\Filament\Reports;
+
+use EightyNine\Reports\Report;
+
+class SalesReport extends Report
+{
+    public ?string $heading = "Sales Report";
+    
+    // This report will only appear in admin and manager panels
+    protected array $panels = ['admin', 'manager'];
+    
+    // Or use the method approach
+    public function panels(): array
+    {
+        return ['admin', 'manager'];
+    }
+    
+    // ... rest of your report implementation
+}
+```
+
+### 3. Panel-Specific Directories
+
+Use completely separate directories for different panels by configuring them in your config file:
+
+```php
+// config/filament-reports.php
+return [
+    'reports_directory' => app_path('Filament/Reports'),
+    'reports_namespace' => 'App\\Filament\\Reports',
+    
+    // Panel-specific configurations
+    'panel_reports' => [
+        'admin' => [
+            'directory' => app_path('Filament/AdminReports'),
+            'namespace' => 'App\\Filament\\AdminReports',
+        ],
+        'customer' => [
+            'directory' => app_path('Filament/CustomerReports'),
+            'namespace' => 'App\\Filament\\CustomerReports',
+        ],
+    ],
+];
+```
+
+Then create the directory structure:
+```
+app/
+├── Filament/
+│   ├── Reports/          # Default reports (shared)
+│   ├── AdminReports/     # Admin-only reports
+│   └── CustomerReports/  # Customer-only reports
+```
+
+### 4. Combining Approaches
+
+You can combine multiple filtering approaches for maximum flexibility:
+
+```php
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->id('admin')
+        ->plugins([
+            ReportsPlugin::make()
+                ->reports([
+                    UserReport::class,
+                    OrderReport::class,
+                    SalesReport::class,
+                ])
+                ->excludeReports([
+                    // Conditionally exclude based on user permissions
+                    auth()->user()->can('view-sensitive-reports') ? [] : [SensitiveReport::class]
+                ])
+                ->filterReports(function (string $reportClass, Panel $panel) {
+                    $report = app($reportClass);
+                    
+                    // Additional business logic
+                    if ($report instanceof TimeSensitiveReport) {
+                        return $report->isCurrentlyAvailable();
+                    }
+                    
+                    return true;
+                })
+        ]);
+}
+```
+
+### Benefits
+
+- **Clean Separation**: Different user roles see only relevant reports
+- **Flexible Configuration**: Multiple ways to achieve the same goal
+- **Maintainable**: Easy to manage which reports appear where
+- **Secure**: Prevent users from seeing reports they shouldn't access
+- **Performant**: Only discovers and loads relevant reports per panel
+
+---
+
 The report has the following sections:
 - Header
 - Body

@@ -16,4 +16,21 @@ return [
      * Disable the default reports menu page
      */
     'reports_custom_menu_page' => true,
+
+    /**
+     * Panel-specific report configurations
+     * 
+     * Example:
+     * 'panel_reports' => [
+     *     'admin' => [
+     *         'directory' => app_path('Filament/AdminReports'),
+     *         'namespace' => 'App\\Filament\\AdminReports',
+     *     ],
+     *     'customer' => [
+     *         'directory' => app_path('Filament/CustomerReports'),
+     *         'namespace' => 'App\\Filament\\CustomerReports',
+     *     ],
+     * ],
+     */
+    'panel_reports' => [],
 ];

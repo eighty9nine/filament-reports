@@ -2,6 +2,7 @@
 
 namespace EightyNine\Reports;
 
+use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
@@ -10,17 +11,31 @@ use Filament\Support\Enums\MaxWidth;
 
 class ReportsPlugin implements Plugin
 {
+    protected array $allowedReports = [];
+    protected array $excludedReports = [];
+    protected ?Closure $reportFilter = null;
+
     public function getId(): string
     {
         return 'filament-reports';
-    }
-
-    public function register(Panel $panel): void
+    }    public function register(Panel $panel): void
     {
-        reports()->discoverReports(
-            in: config('filament-reports.reports_directory'),
-            for: config('filament-reports.reports_namespace')
-        );
+        // Check if there's panel-specific configuration
+        $panelReports = config('filament-reports.panel_reports.' . $panel->getId());
+        
+        if ($panelReports) {
+            // Use panel-specific directory and namespace
+            reports()->discoverReports(
+                in: $panelReports['directory'],
+                for: $panelReports['namespace']
+            );
+        } else {
+            // Use default configuration
+            reports()->discoverReports(
+                in: config('filament-reports.reports_directory'),
+                for: config('filament-reports.reports_namespace')
+            );
+        }
 
         if (config('filament-reports.reports_custom_menu_page') == false) {
             $panel->discoverPages(
@@ -41,8 +56,13 @@ class ReportsPlugin implements Plugin
                             __('filament-reports::menu-page.nav.group')
                     )
                     ->icon(reports()->getNavigationIcon()),
-            ]);            $panel->navigationItems(
+            ]);            
+            
+            $panel->navigationItems(
                 collect(reports()->getReports())
+                    ->filter(function ($report) use ($panel) {
+                        return $this->shouldShowReport($report, $panel);
+                    })
                     ->map(function ($report) {
                         $report = app($report);
 
@@ -86,8 +106,59 @@ class ReportsPlugin implements Plugin
                             );
                     })
                     ->toArray()
-            );
+            );        }
+    }
+
+    public function shouldShowReport(string $reportClass, Panel $panel): bool
+    {
+        // Apply custom filter if set
+        if ($this->reportFilter) {
+            return call_user_func($this->reportFilter, $reportClass, $panel);
         }
+
+        // If allowed reports are specified, only show those
+        if (!empty($this->allowedReports)) {
+            return in_array($reportClass, $this->allowedReports);
+        }
+
+        // If excluded reports are specified, hide those
+        if (!empty($this->excludedReports)) {
+            return !in_array($reportClass, $this->excludedReports);
+        }
+
+        // Check if report has panel-specific configuration
+        $report = app($reportClass);
+        if (method_exists($report, 'getPanels')) {
+            $allowedPanels = $report->getPanels();
+            return empty($allowedPanels) || in_array($panel->getId(), $allowedPanels);
+        }
+
+        return true; // Show all reports by default
+    }
+
+    /**
+     * Set specific reports to show in this panel
+     */
+    public function reports(array $reports): static
+    {
+        $this->allowedReports = $reports;
+        return $this;
+    }    /**
+     * Exclude specific reports from this panel
+     */
+    public function excludeReports(array $reports): static
+    {
+        $this->excludedReports = $reports;
+        return $this;
+    }
+
+    /**
+     * Set a custom filter for reports
+     */
+    public function filterReports(Closure $filter): static
+    {
+        $this->reportFilter = $filter;
+        return $this;
     }
 
     public static function make(): static

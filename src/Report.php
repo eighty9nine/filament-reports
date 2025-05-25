@@ -42,6 +42,8 @@ class Report extends Page implements HasActionsPanel, HasBody, HasFooter, HasFor
 
     public int $sort = 0;
 
+    protected array $panels = [];
+
     public function getSort(): int
     {
         return $this->sort;
@@ -109,5 +111,22 @@ class Report extends Page implements HasActionsPanel, HasBody, HasFooter, HasFor
     public function footer(Footer $footer): Footer
     {
         return $footer;
+    }
+
+    /**
+     * Set which panels this report should be shown in
+     */
+    public function panels(array $panels): static
+    {
+        $this->panels = $panels;
+        return $this;
+    }
+
+    /**
+     * Get the panels this report should be shown in
+     */
+    public function getPanels(): array
+    {
+        return $this->panels;
     }
 }
