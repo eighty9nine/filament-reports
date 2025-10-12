@@ -4,7 +4,7 @@
     "scripts": {
         "dev:styles": "npx tailwindcss -i resources/css/index.css -o resources/dist/filament-reports.css --postcss --watch",
         "dev:scripts": "node bin/build.js --dev",
-        "build:styles": "npx tailwindcss -i resources/css/index.css -o resources/dist/filament-reports.css --postcss --minify && npm run purge",
+        "build:styles": "npx tailwindcss -i resources/css/index.css -o resources/dist/filament-reports.css --postcss --minify",
         "build:scripts": "node bin/build.js",
         "purge": "filament-purge -i resources/dist/filament-reports.css -o resources/dist/filament-reports.css -v 3.x",
         "dev": "npm-run-all --parallel dev:*",

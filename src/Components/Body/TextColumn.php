@@ -4,7 +4,7 @@ namespace EightyNine\Reports\Components\Body;
 
 use Closure;
 use Filament\Support\Concerns\HasLineClamp;
-use Filament\Tables\Columns\TextColumn\TextColumnSize;
+use Filament\Support\Enums\TextSize;
 use Filament\Tables\Contracts\HasTable;
 use stdClass;
 
@@ -25,7 +25,7 @@ class TextColumn extends Column
     /**
      * @var view-string
      */
-    protected string $view = 'filament-tables::columns.text-column';
+    protected string $view = 'filament-reports::components.body.text-column';
 
     protected bool|Closure $canWrap = false;
 
@@ -37,7 +37,7 @@ class TextColumn extends Column
 
     protected int|Closure|null $listLimit = null;
 
-    protected TextColumnSize|string|Closure|null $size = null;
+    protected TextSize|string|Closure|null $size = null;
 
     protected bool|Closure $isLimitedListExpandable = false;
 
@@ -93,14 +93,14 @@ class TextColumn extends Column
         return $this;
     }
 
-    public function size(TextColumnSize|string|Closure|null $size): static
+    public function size(TextSize|string|Closure|null $size): static
     {
         $this->size = $size;
 
         return $this;
     }
 
-    public function getSize(mixed $state): TextColumnSize|string|null
+    public function getSize(mixed $state): TextSize|string|null
     {
         return $this->evaluate($this->size, [
             'state' => $state,

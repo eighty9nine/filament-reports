@@ -18,14 +18,19 @@ trait ResolvesDynamicLivewireProperties
      */
     public function __get($property): mixed
     {
-        // dd($property, $this instanceof HasFooter );
+        // Try parent implementation first (Filament's schema resolution)
+        try {
+            return parent::__get($property);
+        } catch (PropertyNotFoundException $exception) {
+            // If parent doesn't handle it, check our custom properties
+        }
+
         return match ($property) {
-            'header', $this instanceof HasHeader => $this->getTableHeader(),
-            'body', $this instanceof HasBody => $this->getTableBody(),
-            'footer', $this instanceof HasFooter => $this->getTableFooter(),
-            'actionsPanel', $this instanceof HasActionsPanel => $this->getActionsPanel(),
-            'filterForm', $this instanceof HasForms => $this->getFilterForm(),
-            default => throw new PropertyNotFoundException($property, get_class($this)),
+            'header' => $this instanceof HasHeader ? $this->getTableHeader() : throw $exception,
+            'body' => $this instanceof HasBody ? $this->getTableBody() : throw $exception,
+            'footer' => $this instanceof HasFooter ? $this->getTableFooter() : throw $exception,
+            'actionsPanel' => $this instanceof HasActionsPanel ? $this->getActionsPanel() : throw $exception,
+            default => throw $exception,
         };
     }
 }

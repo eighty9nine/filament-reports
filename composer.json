@@ -18,17 +18,19 @@
             "email": "eighty9nine@gmail.com",
             "role": "Developer"
         }
-    ],    "require": {
+    ],
+    "require": {
         "php": "^8.2",
-        "filament/filament": "^3.0",
+        "filament/filament": "^4.0",
         "spatie/laravel-package-tools": "^1.15.0",
         "illuminate/contracts": "^10.0|^11.0|^12.0"
-    },    "require-dev": {
-        "nunomaduro/collision": "^7.9|^8.0",
-        "orchestra/testbench": "^8.0|^9.0|^10.0",
-        "pestphp/pest": "^2.0|^3.0",
-        "pestphp/pest-plugin-arch": "^2.0|^3.0",
-        "pestphp/pest-plugin-laravel": "^2.0|^3.0"
+    },    
+    "require-dev": {
+        "nunomaduro/collision": "^8.1",
+        "orchestra/testbench": "^10.0|^11.0",
+        "pestphp/pest": "^3.7",
+        "pestphp/pest-plugin-arch": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.1"
     },
     "autoload": {
         "psr-4": {

@@ -1,13 +1,34 @@
-const preset = require('./vendor/filament/filament/tailwind.config.preset')
-
-module.exports = {
-    presets: [preset],
+export default {
     content: [
         './app/Filament/**/*.php',
         './resources/views/filament/**/*.blade.php',
         './resources/views/components/**/*.blade.php',
+        './resources/views/page/**/*.blade.php',
         './resources/views/components/body/**/*.blade.php',
         './resources/views/**/*.blade.php',
-        './vendor/filament/**/*.blade.php',
+        './src/**/*.php',
     ],
+    safelist: [
+        'w-96',
+        'flex',
+        'flex-grow',
+        'text-xl',
+        'list-disc',
+        'list-inside',
+        'text-sm',
+        'text-gray-500',
+        'truncate',
+        'inline-flex',
+        'items-center',
+        'px-2',
+        'py-1',
+        'text-xs',
+        'font-medium',
+        'rounded-md',
+    ],
+    darkMode: 'class',
+    theme: {
+        extend: {},
+    },
+    plugins: [],
 }

@@ -3,8 +3,9 @@
 namespace EightyNine\Reports\Concerns;
 
 use Filament\Actions\Action;
-use Filament\Forms\Form;
+use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Pages\Concerns\InteractsWithFormActions;
+use Filament\Schemas\Schema;
 
 trait HasFilterForm
 {
@@ -20,14 +21,9 @@ trait HasFilterForm
         $this->filterForm->fill();
     }
 
-    public function filterForm(Form $form): Form
+    public function filterForm(Schema $schema): Schema
     {
-        return $form;
-    }
-
-    protected function getFilterForm(): Form
-    {
-        return $this->filterForm(Form::make($this))
+        return $schema
             ->statePath('data');
     }
 

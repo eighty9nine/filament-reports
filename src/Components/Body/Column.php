@@ -40,6 +40,11 @@ class Column extends ViewComponent
     use HasExtraAttributes;
     use HasPlaceholder;
 
+    /**
+     * @var view-string
+     */
+    protected string $view = 'filament-reports::components.body.column';
+
     protected string $evaluationIdentifier = 'column';
 
     protected string $viewIdentifier = 'column';

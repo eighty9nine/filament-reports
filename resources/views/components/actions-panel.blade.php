@@ -26,11 +26,14 @@
         </x-filament::dropdown>
     </div>
     <div>
-        <x-filament-panels::form :wire:key="$this->getId() . '.forms.' . $this->getFormStatePath()" wire:submit="filter">
+        <form wire:submit="filter">
             {{ $this->filterForm }}
-
-            <x-filament-panels::form.actions :actions="$this->getCachedFormActions()" :full-width="$this->hasFullWidthFormActions()" />
-        </x-filament-panels::form>
-
+            
+            <div class="fi-form-actions">
+                @foreach($this->getCachedFormActions() as $action)
+                    {{ $action }}
+                @endforeach
+            </div>
+        </form>
     </div>
 </div>

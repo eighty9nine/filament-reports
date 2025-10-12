@@ -108,10 +108,7 @@ border-bottom: 1px solid rgb(210, 210, 210);">
                                         padding-bottom: 4px;
                                         {{ $loop->parent->last ? 'border-bottom: 1px solid #aaa;' : 'border-bottom: 1px solid #eee;' }}
                                         ">
-                                    <x-filament-tables::columns.column :column="$column"
-                                                                    :is-click-disabled="$column->isClickDisabled()"
-                                                                    :record="$row"
-                                                                    :record-key="$loop->iteration" />
+                                    {{ $column->record($row)->recordKey($loop->iteration) }}
                                 </x-filament-reports::table.cell>
                             @endif
                         @else
@@ -123,10 +120,7 @@ border-bottom: 1px solid rgb(210, 210, 210);">
                                     padding-bottom: 4px;
                                     {{ $loop->parent->last ? 'border-bottom: 1px solid #aaa;' : 'border-bottom: 1px solid #eee;' }}
                                     ">
-                                <x-filament-tables::columns.column :column="$column"
-                                                                :is-click-disabled="$column->isClickDisabled()"
-                                                                :record="$row"
-                                                                :record-key="$loop->iteration" />
+                                {{ $column->record($row)->recordKey($loop->iteration) }}
                             </x-filament-reports::table.cell>
                         @endif
                         {{-- @endforeach --}}
