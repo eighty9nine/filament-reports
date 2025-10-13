@@ -6,7 +6,6 @@ use EightyNine\Reports\Contracts\HasActionsPanel;
 use EightyNine\Reports\Contracts\HasBody;
 use EightyNine\Reports\Contracts\HasFooter;
 use EightyNine\Reports\Contracts\HasHeader;
-use Filament\Forms\Contracts\HasForms;
 use Livewire\Exceptions\PropertyNotFoundException;
 
 trait ResolvesDynamicLivewireProperties
