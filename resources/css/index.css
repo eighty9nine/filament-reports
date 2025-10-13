@@ -1,10 +1,17 @@
-@import '../../vendor/filament/filament/resources/css/theme.css';
+@tailwind components;
+@tailwind utilities;
 
 @import './print-styles.css';
 
-#fi-report .fi-ta-text{
-    padding-top: 0px !important;
-    padding-bottom: 0px !important;
-    padding-left: 0px !important;
-    padding-right: 0px !important;
+@layer components {
+    #fi-report .fi-ta-text {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    
+    .fi-reports-action-panel .fi-form-actions {
+        margin-top: 1rem;
+    }
 }
