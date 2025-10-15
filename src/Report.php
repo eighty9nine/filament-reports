@@ -102,9 +102,6 @@ class Report extends Page implements HasActionsPanel, HasBody, HasFooter, HasFor
     /**
      * Define the header content for the report.
      * Override this method to add header components.
-     * 
-     * @param Schema $schema
-     * @return Schema
      */
     public function header(Schema $schema): Schema
     {
@@ -116,9 +113,6 @@ class Report extends Page implements HasActionsPanel, HasBody, HasFooter, HasFor
     /**
      * Define the body content for the report.
      * Override this method to add body components.
-     * 
-     * @param Schema $schema
-     * @return Schema
      */
     public function body(Schema $schema): Schema
     {
@@ -130,9 +124,6 @@ class Report extends Page implements HasActionsPanel, HasBody, HasFooter, HasFor
     /**
      * Define the footer content for the report.
      * Override this method to add footer components.
-     * 
-     * @param Schema $schema
-     * @return Schema
      */
     public function footer(Schema $schema): Schema
     {

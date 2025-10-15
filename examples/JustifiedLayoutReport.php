@@ -6,10 +6,9 @@ use EightyNine\Reports\Components\Body\Layout\BodyColumn;
 use EightyNine\Reports\Components\Body\Layout\BodyRow;
 use EightyNine\Reports\Components\Text;
 use EightyNine\Reports\Report;
+use Filament\Schemas\Schema;
 use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
-use Filament\Support\Facades\FilamentView;
-use Filament\Schemas\Schema;
 
 class JustifiedLayoutReport extends Report
 {
