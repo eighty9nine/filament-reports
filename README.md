@@ -8,9 +8,11 @@
 
 - PHP 8.2 or higher
 - Laravel 10.0, 11.0, or 12.0
-- Filament 3.0 or higher
+- Filament 4.0 or higher
 
 > **Note:** Laravel 12 support is now available! If you're upgrading from a previous version, please ensure your PHP version is 8.2 or higher as this is required for Laravel 12 compatibility.
+
+> **Breaking Change:** This package now requires Filament v4. If you're using Filament v3, please see the [Upgrade Guide](#upgrade-guide) below.
 
 ## 🛠️ Be Part of the Journey
 
@@ -60,10 +62,7 @@ The command will create a report class with the following structure:
 namespace App\Filament\Reports;
 
 use EightyNine\Reports\Report;
-use EightyNine\Reports\Components\Body;
-use EightyNine\Reports\Components\Footer;
-use EightyNine\Reports\Components\Header;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 
 class UserReport extends Report
 {
@@ -71,37 +70,32 @@ class UserReport extends Report
 
     // public ?string $subHeading = "A report";
 
-    public function header(Header $header): Header
+    public function header(Schema $schema): Schema
     {
-        return $header
-            ->schema([
-                // ...
-            ]);
+        return $schema->components([
+            // Add header components here
+        ]);
     }
 
-
-    public function body(Body $body): Body
+    public function body(Schema $schema): Schema
     {
-        return $body
-            ->schema([
-                // ...
-            ]);
+        return $schema->components([
+            // Add body components here
+        ]);
     }
 
-    public function footer(Footer $footer): Footer
+    public function footer(Schema $schema): Schema
     {
-        return $footer
-            ->schema([
-                // ...
-            ]);
+        return $schema->components([
+            // Add footer components here
+        ]);
     }
 
-    public function filterForm(Form $form): Form
+    public function filterForm(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                // ...
-            ]);
+        return $schema->components([
+            // Add filter form components here
+        ]);
     }
 }
 
@@ -302,27 +296,26 @@ Apart from the Layouts, the header also has components that can be used to displ
 Here is an example of the header section:
 ```php
 
-    public function header(Header $header): Header
+    public function header(Schema $schema): Schema
     {
-        return $header
-            ->schema([
-                Header\Layout\HeaderRow::make()
-                ->schema([
-                    Header\Layout\HeaderColumn::make()
-                        ->schema([
-                            Text::make("User registration report")
-                                ->title()
-                                ->primary(),
-                            Text::make("A user registration report")
-                                ->subtitle(),
-                        ]),
-                    Header\Layout\HeaderColumn::make()
-                        ->schema([
-                            Image::make($imagePath),
-                        ])
-                        ->alignRight(),
-                ]),
-            ]);
+        return $schema->components([
+            Header\Layout\HeaderRow::make()
+            ->components([
+                Header\Layout\HeaderColumn::make()
+                    ->schema([
+                        Text::make("User registration report")
+                            ->title()
+                            ->primary(),
+                        Text::make("A user registration report")
+                            ->subtitle(),
+                    ]),
+                Header\Layout\HeaderColumn::make()
+                    ->schema([
+                        Image::make($imagePath),
+                    ])
+                    ->alignRight(),
+            ]),
+        ]);
     }
 
 ````
@@ -344,26 +337,25 @@ The `Text` and `Image` components can also be used in the body section.
 Here is an example of the body section:
 ```php
 
-    public function body(Body $body): Body
+    public function body(Schema $schema): Schema
     {
-        return $body
-            ->schema([
-                Body\Layout\BodyColumn::make()
-                    ->schema([
-                        Body\Table::make()
-                            ->columns([
-                                EightyNine\Reports\Components\Body\TextColumn::make("name"),
-                                EightyNine\Reports\Components\Body\TextColumn::make("age")
-                                    ->numeric()
+        return $schema->components([
+            Body\Layout\BodyColumn::make()
+                ->schema([
+                    Body\Table::make()
+                        ->columns([
+                            EightyNine\Reports\Components\Body\TextColumn::make("name"),
+                            EightyNine\Reports\Components\Body\TextColumn::make("age")
+                                ->numeric()
+                        ])
+                        ->data(
+                            fn(?array $filters) => collect([
+                                [ "name" => "One",   "age" => 5 ],
+                                [ "name" => "Two",   "age" => 5 ],
+                                [ "name" => "Three", "age" => 5 ],
+                                [ "name" => "Four",  "age" => 5 ],
                             ])
-                            ->data(
-                                fn(?array $filters) => collect([
-                                    [ "name" => "One",   "age" => 5 ],
-                                    [ "name" => "Two",   "age" => 5 ],
-                                    [ "name" => "Three", "age" => 5 ],
-                                    [ "name" => "Four",  "age" => 5 ],
-                                ])
-                            ),
+                        ),
                         VerticalSpace::make(),
                         Body\Table::make()
                             ->data(
@@ -381,27 +373,26 @@ The footer section has the `Text` and `Image` components, and the `FooterColumn`
 
 ```php
 
-    public function footer(Footer $footer): Footer
+    public function footer(Schema $schema): Schema
     {
-        return $footer
-            ->schema([
-                Footer\Layout\FooterRow::make()
-                    ->schema([
-                        Footer\Layout\FooterColumn::make()
-                            ->schema([
-                                Text::make("Footer title")
-                                    ->title()
-                                    ->primary(),
-                                Text::make("Footer subtitle")
-                                    ->subtitle(),
-                            ]),
-                        Footer\Layout\FooterColumn::make()
-                            ->schema([
-                                Text::make("Generated on: " . now()->format('Y-m-d H:i:s')),
-                            ])
-                            ->alignRight(),
-                    ]),
-            ]);
+        return $schema->components([
+            Footer\Layout\FooterRow::make()
+                ->schema([
+                    Footer\Layout\FooterColumn::make()
+                        ->schema([
+                            Text::make("Footer title")
+                                ->title()
+                                ->primary(),
+                            Text::make("Footer subtitle")
+                                ->subtitle(),
+                        ]),
+                    Footer\Layout\FooterColumn::make()
+                        ->schema([
+                            Text::make("Generated on: " . now()->format('Y-m-d H:i:s')),
+                        ])
+                        ->alignRight(),
+                ]),
+        ]);
     }
 ```
 
@@ -413,16 +404,15 @@ filter data will be available in all the tables `data()` callback. This will be 
 Example of a filter form:
 ```php
 
-public function filterForm(Form $form): Form
+public function filterForm(Schema $schema): Schema
 {
-    return $form
-        ->schema([
-            Input::make('search')
-                ->placeholder('Search')
-                ->autofocus()
-                ->iconLeft('heroicon-o-search'),
-            Select::make('status')
-                ->placeholder('Status')
+    return $schema->components([
+        Input::make('search')
+            ->placeholder('Search')
+            ->autofocus()
+            ->iconLeft('heroicon-o-search'),
+        Select::make('status')
+            ->placeholder('Status')
                 ->options([
                     'active' => 'Active',
                     'inactive' => 'Inactive',
@@ -455,6 +445,145 @@ You can group a column in multiple rows, in order to show related data.
                 ["location"=>"New York", "name" => "Four",  "age" => 5 ],
             ])->orderBy('location')
         ),
+```
+
+## Upgrade Guide
+
+### Upgrading from Filament v3 to v4
+
+This package has been updated to support Filament v4, which introduces significant architectural changes. Follow this guide to upgrade your existing reports.
+
+#### 1. Update Dependencies
+
+First, update your composer dependencies:
+
+```bash
+composer require filament/filament:"^4.0" eightynine/filament-reports:"^4.0"
+```
+
+#### 2. Update Report Class Structure
+
+The biggest change is the move from typed component classes to Schema-based architecture.
+
+**Before (Filament v3):**
+```php
+use EightyNine\Reports\Components\Header;
+use EightyNine\Reports\Components\Body;
+use EightyNine\Reports\Components\Footer;
+use Filament\Forms\Form;
+
+class MyReport extends Report
+{
+    public function header(Header $header): Header
+    {
+        return $header->schema([
+            Text::make('My Report Title'),
+        ]);
+    }
+
+    public function body(Body $body): Body
+    {
+        return $body->schema([
+            Text::make('Report content'),
+        ]);
+    }
+
+    public function footer(Footer $footer): Footer
+    {
+        return $footer->schema([
+            Text::make('Footer content'),
+        ]);
+    }
+
+    public function filterForm(Form $form): Form
+    {
+        return $form->schema([
+            TextInput::make('search'),
+        ]);
+    }
+}
+```
+
+**After (Filament v4):**
+```php
+use Filament\Schemas\Schema;
+
+class MyReport extends Report
+{
+    public function header(Schema $schema): Schema
+    {
+        return $schema->components([
+            Text::make('My Report Title'),
+        ]);
+    }
+
+    public function body(Schema $schema): Schema
+    {
+        return $schema->components([
+            Text::make('Report content'),
+        ]);
+    }
+
+    public function footer(Schema $schema): Schema
+    {
+        return $schema->components([
+            Text::make('Footer content'),
+        ]);
+    }
+
+    public function filterForm(Schema $schema): Schema
+    {
+        return $schema->components([
+            TextInput::make('search'),
+        ]);
+    }
+}
+```
+
+#### 4. Migration Steps
+
+1. **Update Imports**: Remove old component imports and add `use Filament\Schemas\Schema;`
+
+2. **Update Method Signatures**: Change all header, body, footer, and filterForm methods to accept and return `Schema`
+
+3. **Update Method Bodies**: Change `->schema([])` to `->components([])`
+
+4. **Test Your Reports**: Ensure all components render correctly with the new architecture
+
+#### 5. Component Updates
+
+The individual report components (Text, Image, etc.) remain largely the same, but they now work within the Schema system:
+
+```php
+// Components still work the same way
+Text::make('Hello World')
+    ->color('primary')
+    ->size('lg'),
+
+Image::make('/path/to/image.jpg')
+    ->width(200)
+    ->height(150),
+```
+
+#### 6. Filter Form Migration
+
+Filter forms now use the same Schema pattern:
+
+```php
+public function filterForm(Schema $schema): Schema
+{
+    return $schema->components([
+        Section::make('Filters')
+            ->schema([
+                TextInput::make('search')
+                    ->label('Search'),
+                DatePicker::make('date_from')
+                    ->label('From Date'),
+                DatePicker::make('date_to')
+                    ->label('To Date'),
+            ]),
+    ]);
+}
 ```
 
 ## Changelog
