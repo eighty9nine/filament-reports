@@ -2,9 +2,6 @@
 
 namespace EightyNine\Reports;
 
-use EightyNine\Reports\Components\Body;
-use EightyNine\Reports\Components\Footer;
-use EightyNine\Reports\Components\Header;
 use EightyNine\Reports\Concerns\HasFilterForm;
 use EightyNine\Reports\Concerns\HasReportActions;
 use EightyNine\Reports\Concerns\InteractsWithActionsPanel;
@@ -17,6 +14,7 @@ use Filament\Facades\Filament;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
 use Filament\Panel;
+use Filament\Schemas\Schema;
 
 class Report extends Page implements HasActionsPanel, HasBody, HasFooter, HasForms, HasHeader
 {
@@ -86,34 +84,61 @@ class Report extends Page implements HasActionsPanel, HasBody, HasFooter, HasFor
             ->prepend("filament.{$panel->getId()}.reports.");
     }
 
-    public function getTableHeader(): Header
+    public function getTableHeader(): Schema
     {
-        return $this->header(Header::make($this));
+        return $this->header(Schema::make());
     }
 
-    public function getTableBody(): Body
+    public function getTableBody(): Schema
     {
-        return $this->body(Body::make($this, $this->getFilterData()));
+        return $this->body(Schema::make());
     }
 
-    public function getTableFooter(): Footer
+    public function getTableFooter(): Schema
     {
-        return $this->footer(Footer::make($this));
+        return $this->footer(Schema::make());
     }
 
-    public function header(Header $header): Header
+    /**
+     * Define the header content for the report.
+     * Override this method to add header components.
+     * 
+     * @param Schema $schema
+     * @return Schema
+     */
+    public function header(Schema $schema): Schema
     {
-        return $header;
+        return $schema->components([
+            // Override this method to add header components
+        ]);
     }
 
-    public function body(Body $body): Body
+    /**
+     * Define the body content for the report.
+     * Override this method to add body components.
+     * 
+     * @param Schema $schema
+     * @return Schema
+     */
+    public function body(Schema $schema): Schema
     {
-        return $body;
+        return $schema->components([
+            // Override this method to add body components
+        ]);
     }
 
-    public function footer(Footer $footer): Footer
+    /**
+     * Define the footer content for the report.
+     * Override this method to add footer components.
+     * 
+     * @param Schema $schema
+     * @return Schema
+     */
+    public function footer(Schema $schema): Schema
     {
-        return $footer;
+        return $schema->components([
+            // Override this method to add footer components
+        ]);
     }
 
     /**

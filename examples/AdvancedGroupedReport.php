@@ -2,23 +2,21 @@
 
 namespace Examples;
 
-use EightyNine\Reports\Components\Body;
 use EightyNine\Reports\Components\Body\Table;
 use EightyNine\Reports\Components\Body\TextColumn;
-use EightyNine\Reports\Components\Footer;
-use EightyNine\Reports\Components\Header;
 use EightyNine\Reports\Components\Header\Layout\HeaderColumn;
 use EightyNine\Reports\Components\Text;
 use EightyNine\Reports\Report;
+use Filament\Schemas\Schema;
 
 class AdvancedGroupedReport extends Report
 {
     public ?string $heading = 'Advanced Grouped Sales Report';
 
-    public function header(Header $header): Header
+    public function header(Schema $schema): Schema
     {
-        return $header
-            ->schema([
+        return $schema
+            ->components([
                 HeaderColumn::make()
                     ->schema([
                         Text::make('Advanced Sales Report with Multiple Grouping Options')
@@ -28,20 +26,20 @@ class AdvancedGroupedReport extends Report
             ]);
     }
 
-    public function body(Body $body): Body
+    public function body(Schema $schema): Schema
     {
-        return $body
-            ->schema([
+        return $schema
+            ->components([
                 $this->createSimpleGroupedTable(),
                 $this->createHierarchicalGroupedTable(),
                 $this->createMultiLevelGroupedTable(),
             ]);
     }
 
-    public function footer(Footer $footer): Footer
+    public function footer(Schema $schema): Schema
     {
-        return $footer
-            ->schema([
+        return $schema
+            ->components([
                 // Footer content can be added here if needed
             ]);
     }

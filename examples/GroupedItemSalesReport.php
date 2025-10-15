@@ -2,16 +2,13 @@
 
 namespace Examples;
 
-use EightyNine\Reports\Components\Body;
 use EightyNine\Reports\Components\Body\Table;
 use EightyNine\Reports\Components\Body\TextColumn;
-use EightyNine\Reports\Components\Footer;
-use EightyNine\Reports\Components\Header;
 use EightyNine\Reports\Components\Header\Layout\HeaderColumn;
 use EightyNine\Reports\Components\Text;
 use EightyNine\Reports\Report;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 
 class GroupedItemSalesReport extends Report
 {
@@ -21,10 +18,10 @@ class GroupedItemSalesReport extends Report
 
     public ?string $subHeading = 'A report showing sales data grouped by product categories';
 
-    public function header(Header $header): Header
+    public function header(Schema $schema): Schema
     {
-        return $header
-            ->schema([
+        return $schema
+            ->components([
                 HeaderColumn::make()
                     ->schema([
                         Text::make('Item Sales Report by Category')
@@ -36,7 +33,7 @@ class GroupedItemSalesReport extends Report
             ]);
     }
 
-    public function body(Body $body): Body
+    public function body(Schema $schema): Schema
     {
         // Sample data - replace with your actual data source
         $items = collect([
@@ -50,8 +47,8 @@ class GroupedItemSalesReport extends Report
         // Transform data to include category totals and group structure
         $groupedData = $this->prepareGroupedData($items);
 
-        return $body
-            ->schema([
+        return $schema
+            ->components([
                 Table::make()
                     ->data(fn () => $groupedData)
                     ->columns([
@@ -68,17 +65,17 @@ class GroupedItemSalesReport extends Report
             ]);
     }
 
-    public function footer(Footer $footer): Footer
+    public function footer(Schema $schema): Schema
     {
-        return $footer
-            ->schema([
+        return $schema
+            ->components([
                 // Footer content can be added here if needed
             ]);
     }
 
-    public function filterForm(Form $form): Form
+    public function filterForm(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 TextInput::make('category_filter')
                     ->label('Filter by Category')

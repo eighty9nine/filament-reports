@@ -5,11 +5,13 @@
 use EightyNine\Reports\Components\Body\Layout\BodyColumn;
 use EightyNine\Reports\Components\Body\Layout\BodyRow;
 use EightyNine\Reports\Components\Text;
-use EightyNine\Reports\ReportBuilder;
+use EightyNine\Reports\Report;
 use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
+use Filament\Support\Facades\FilamentView;
+use Filament\Schemas\Schema;
 
-class JustifiedLayoutReport extends ReportBuilder
+class JustifiedLayoutReport extends Report
 {
     public function setUp(): void
     {
@@ -19,9 +21,9 @@ class JustifiedLayoutReport extends ReportBuilder
         ]);
     }
 
-    public function getBody(): array
+    public function body(Schema $schema): Schema
     {
-        return [
+        return $schema->components([
             // Example 1: Equal height columns with justified content
             BodyRow::make([
                 BodyColumn::make([
@@ -136,13 +138,13 @@ class JustifiedLayoutReport extends ReportBuilder
                 ->extraAttributes([
                     'style' => 'display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px;',
                 ]),
-        ];
+        ]);
     }
 
     // Alternative method using CSS classes instead of inline styles
-    public function getBodyWithCssClasses(): array
+    public function getBodyWithCssClasses(): Schema
     {
-        return [
+        return Schema::make()->components([
             BodyRow::make([
                 BodyColumn::make([
                     Text::make('CSS Class Column 1'),
@@ -167,6 +169,6 @@ class JustifiedLayoutReport extends ReportBuilder
                 Text::make('Equal width item 3'),
             ])
                 ->extraAttributes(['class' => 'equal-width-column']),
-        ];
+        ]);
     }
 }
