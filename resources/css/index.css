@@ -1,7 +1,11 @@
+@import "tailwindcss";
 @import './print-styles.css';
 
-@tailwind components;
-@tailwind utilities;
+@source './app/Filament/**/*.php';
+@source './resources/views/**/*.blade.php';
+@source './src/**/*.php';
+
+@variant dark (&:where(.dark, .dark *));
 
 @layer components {
     #fi-report .fi-ta-text {
