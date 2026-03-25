@@ -1,7 +1,7 @@
+@import './print-styles.css';
+
 @tailwind components;
 @tailwind utilities;
-
-@import './print-styles.css';
 
 @layer components {
     #fi-report .fi-ta-text {
@@ -10,7 +10,7 @@
         padding-left: 0px !important;
         padding-right: 0px !important;
     }
-    
+
     .fi-reports-action-panel .fi-form-actions {
         margin-top: 1rem;
     }

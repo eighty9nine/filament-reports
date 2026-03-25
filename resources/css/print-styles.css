@@ -1,20 +1,26 @@
 @media print {
+
+    * {
+        page-break-before: avoid !important;
+        break-before: avoid !important;
+    }
+
     .fi-topbar {
         display: none !important;
     }
-    
+
     .fi-sidebar {
         display: none !important;
     }
-    
+
     .fi-reports-action-panel {
         display: none !important;
     }
-    
+
     .fi-header-heading {
         display: none !important;
     }
-    
+
     .fi-header-subheading {
         display: none !important;
     }
@@ -37,6 +43,7 @@
         padding: 0 !important;
         vertical-align: top;
         background-color: rgb(255 255 255) !important;
+
     }
 
     #fi-report tbody {
@@ -58,11 +65,14 @@
         padding-bottom: 0 !important;
     }
 
+    .fi-page-header-main-ctn {
+        padding-block: 0 !important;
+        row-gap: 0 !important;
+    }
+
     main {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .text-white {
