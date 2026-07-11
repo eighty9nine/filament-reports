@@ -1,5 +1,5 @@
 @php
-    $state = $getState();
+    $state = $formatState($getState());
     $isBadge = $isBadge();
     $isBulleted = $isBulleted();
     $isListWithLineBreaks = $isListWithLineBreaks();
