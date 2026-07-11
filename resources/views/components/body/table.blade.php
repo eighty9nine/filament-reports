@@ -92,6 +92,21 @@ border-bottom: 1px solid rgb(210, 210, 210);">
                             if ($column->isHidden()) continue;
                             $column->record($row);
                             $column->rowLoop($loop->parent);
+                            $cellAlignment = $column->getAlignment() ?? \Filament\Support\Enums\Alignment::Start;
+                            if (! $cellAlignment instanceof \Filament\Support\Enums\Alignment) {
+                                $cellAlignment = filled($cellAlignment) ? (\Filament\Support\Enums\Alignment::tryFrom($cellAlignment) ?? $cellAlignment) : null;
+                            }
+                            $cellAlignmentClasses = \Illuminate\Support\Arr::toCssClasses([
+                                match ($cellAlignment) {
+                                    \Filament\Support\Enums\Alignment::Start => 'justify-start text-start',
+                                    \Filament\Support\Enums\Alignment::Center => 'justify-center text-center',
+                                    \Filament\Support\Enums\Alignment::End => 'justify-end text-end',
+                                    \Filament\Support\Enums\Alignment::Left => 'justify-start text-left',
+                                    \Filament\Support\Enums\Alignment::Right => 'justify-end text-right',
+                                    \Filament\Support\Enums\Alignment::Justify => 'justify-between text-justify',
+                                    default => $cellAlignment,
+                                },
+                            ]);
                         @endphp
                         @if ($column->areRowsGrouped())
                             @php
@@ -101,6 +116,7 @@ border-bottom: 1px solid rgb(210, 210, 210);">
                             @if ($isFirstWithinGroup($rowIndex, $key, $cell))
                                 <x-filament-reports::table.cell
                                     rowspan="{{$rowspan}}"
+                                    class="{{ $cellAlignmentClasses }}"
                                     style="
                                         padding-left: 8px;
                                         padding-right: 8px;
@@ -113,6 +129,7 @@ border-bottom: 1px solid rgb(210, 210, 210);">
                             @endif
                         @else
                             <x-filament-reports::table.cell
+                                class="{{ $cellAlignmentClasses }}"
                                 style="
                                     padding-left: 8px;
                                     padding-right: 8px;
